@@ -1,10 +1,13 @@
 package com.vcore.backend_plataforma_web.model;
 
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,5 +27,8 @@ public class Rol {
     private String nombre; // Ej: "ESTUDIANTE", "PROFESOR", "ADMIN"
     
     private String descripcion;
+
+    @ManyToMany(mappedBy = "roles")
+    private List<Usuario> usuarios; 
     
 }
