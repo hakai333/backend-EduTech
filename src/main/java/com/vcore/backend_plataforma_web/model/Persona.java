@@ -1,6 +1,5 @@
 package com.vcore.backend_plataforma_web.model;
 
-
 import java.util.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Table(name = "personas")
 @Data
@@ -20,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String rut;
     private String dv_rut;
     private String nombre;

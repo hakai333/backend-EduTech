@@ -1,7 +1,6 @@
 package com.vcore.backend_plataforma_web.model;
 
 import java.sql.Date;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class Incidencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String descripcion;
     private Boolean estado;
     private Date fechaReporte;

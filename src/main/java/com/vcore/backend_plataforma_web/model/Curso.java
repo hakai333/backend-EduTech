@@ -17,13 +17,9 @@ import lombok.NoArgsConstructor;
 public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String nombre;
     private String descripcion;
     private Usuario usuario;
-    //@ManyToOne()
     private Double precio;
-
-    //private List<Modulo> modulos;
-
 }

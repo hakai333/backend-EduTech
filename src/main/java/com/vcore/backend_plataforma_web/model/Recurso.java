@@ -9,15 +9,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+@Entity
+@Table(name = "recursos")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "modulos")
-public class Modulo {
+public class Recurso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nombre;
+    private String nombreRecurso;
+    private String tipo;
+    private String url;
     private String descripcion;
 }

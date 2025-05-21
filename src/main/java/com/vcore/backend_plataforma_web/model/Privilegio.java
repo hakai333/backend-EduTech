@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Table(name = "privilegios")
 @Data
@@ -18,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Privilegio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String codigo; // Ej: "crear_curso", "eliminar_usuario"
     private String descripcion;
 }
