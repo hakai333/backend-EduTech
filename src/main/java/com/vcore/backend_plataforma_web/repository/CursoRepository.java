@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.vcore.backend_plataforma_web.model.Curso;
 
-public interface CursoRepository extends JpaRepository<Curso, Long>{
+public interface CursoRepository extends JpaRepository<Curso, Integer>{
 
 }
