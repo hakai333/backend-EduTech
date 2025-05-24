@@ -12,6 +12,16 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    public String almacenar(Usuario usuario) {
+       Usuario validacion = usuarioRepository.findByNombre(usuario.getNombre());
+        if(validacion == null) {
+            usuarioRepository.save(usuario);
+            return "Rol almacenado correctamente!";
+        } else {
+            return "Rol ya ingresado!";
+        }
+    }
+
     public List<Usuario> listar(){
         return usuarioRepository.findAll();
     }
