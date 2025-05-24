@@ -1,5 +1,7 @@
 package com.vcore.backend_plataforma_web.model;
 
+import java.sql.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,19 +11,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "roles")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Rol {
+@Entity
+@Table(name = "soportes")
+public class Soporte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nombre; // Ej: "ESTUDIANTE", "PROFESOR", "ADMIN"
-    private String descripcion;
-
-    //conectar
-    //private List<Privilegio> privilegios;
-    //private List<Usuario> usuarios; 
+    private Date fechaAsignacion;
+    private String proveedor;
 }

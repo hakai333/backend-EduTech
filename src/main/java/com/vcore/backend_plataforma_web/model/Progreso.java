@@ -18,7 +18,5 @@ public class Progreso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Inscripcion inscripcion;
-    private Modulo modulo;
     private Double porcentaje;
 }

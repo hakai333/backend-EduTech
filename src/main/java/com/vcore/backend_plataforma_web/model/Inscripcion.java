@@ -19,7 +19,6 @@ public class Inscripcion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Curso curso;
     private Date fechaInscripcion;
     private Double precio;
     private Boolean estado;

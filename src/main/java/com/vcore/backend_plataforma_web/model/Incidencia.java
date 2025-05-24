@@ -1,6 +1,8 @@
 package com.vcore.backend_plataforma_web.model;
 
+
 import java.sql.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
