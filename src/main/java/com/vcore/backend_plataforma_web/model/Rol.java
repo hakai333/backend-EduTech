@@ -1,9 +1,12 @@
 package com.vcore.backend_plataforma_web.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,10 +21,8 @@ public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nombre; // Ej: "ESTUDIANTE", "PROFESOR", "ADMIN"
-    private String descripcion;
+    private String nombre; // "ESTUDIANTE", "PROFESOR", "ADMIN", "GERENTE"
 
-    //conectar
-    //private List<Privilegio> privilegios;
-    //private List<Usuario> usuarios; 
+    @OneToMany(mappedBy = "rol")
+    private List<Usuario> usuarios; 
 }
