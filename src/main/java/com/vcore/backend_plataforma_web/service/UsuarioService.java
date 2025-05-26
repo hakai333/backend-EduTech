@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.vcore.backend_plataforma_web.controller.UsuarioController;
 import com.vcore.backend_plataforma_web.model.Rol;
 import com.vcore.backend_plataforma_web.model.Usuario;
 import com.vcore.backend_plataforma_web.repository.RolRepository;
@@ -45,6 +44,8 @@ public class UsuarioService {
 
 
 
+
+
     //METODOS DE ADMIN
     //ADMIN--CREAR USUARIO
     public String almacenar(Usuario usuarioACrear, Usuario usuarioActual) {
@@ -77,27 +78,61 @@ public class UsuarioService {
     
 
     //ADMIN--ACTUALIZAR USUARIO
-    public String actualizar(Usuario usuarioActualizar, Usuario usuarioActual, int id) {
+    public String actualizar(Usuario usuarioActualizar, Usuario usuarioActual, Integer id) {
+        if(usuarioActual == null || usuarioActual.getRol() == null) {
+            return "Error: Usuario actual inválido";
+        }
+        
         if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
             return "Acceso denegado! -- Usuario en @PathVariable no tiene permisos";
+        }
+
+        if(usuarioActualizar == null) {
+            return "Error: Datos de usuario no proporcionados";
+        }
+
+        if (id == null) {
+            return "Error: ID de usuario no proporcionado";
         }
 
         //ENCONTRAMOS AL USUARIO A CAMBIAR
         Usuario usuarioACambiar = usuarioRepository.findById(id).orElse(null);
         if(usuarioACambiar == null) {
             return "Usuario no existe!";
-        } else {
+        } 
+        //Verifica que cada parametro sea distinto a nulo para cambiarlo
+        if(usuarioActualizar.getNombre() != null) {
             usuarioACambiar.setNombre(usuarioActualizar.getNombre());
+        }
+        if(usuarioActualizar.getContrasena() != null) {
             usuarioACambiar.setContrasena(usuarioActualizar.getContrasena());
+        }
+        if(usuarioActualizar.getEmail() != null) {
             usuarioACambiar.setEmail(usuarioActualizar.getEmail());
+        }
+        if(usuarioActualizar.getFecha_registro() != null) {
             usuarioACambiar.setFecha_registro(usuarioActualizar.getFecha_registro());
-            usuarioRepository.save(usuarioACambiar);
-            return "Usuario actualizado!";
         }
         
-
-        
+        //verifica que el rol nuevo no sea null y que el nombre del rol no sea null
+        if (usuarioActualizar.getRol() != null && usuarioActualizar.getRol().getNombre() != null) {          
+            //INGRESA EL ROL A ACTUALIZAR A nuevoRol para ver si es null
+            Rol nuevoRol = rolRepository.findByNombre(usuarioActualizar.getRol().getNombre());  
+            //SI NO ES NULL, LE INGRESARA EL ROL A usuario a cambiar
+            if (nuevoRol != null) {
+            usuarioACambiar.setRol(nuevoRol);
+            } else {
+                return "Error: El rol especificado no existe";
+            }        
+        }
+        usuarioRepository.save(usuarioACambiar);
+        return "Usuario actualizado!";
+  
     }
-   
 
+    //ADMIN--DESACTIVAR USUARIO
+
+
+    
+    //ADMIN--ELIMINAR USUARIO
 }

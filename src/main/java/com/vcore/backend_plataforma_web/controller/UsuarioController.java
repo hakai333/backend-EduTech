@@ -46,16 +46,20 @@ public class UsuarioController {
     }
     
     //ACTUALIZAR USUARIOf
-    /* @PostMapping("/actualizar/{nombreUsuarioActual}/{idUsuarioActualizar}")
+    @PostMapping("/actualizar/{nombreUsuarioActual}/{idUsuarioActualizar}")
     public String actualizarUsuario(
         @RequestBody Usuario usuarioActualizar,
         @PathVariable String nombreUsuarioActual,
-        @PathVariable Integer idUsuarioACambiar
+        @PathVariable Integer idUsuarioActualizar
     ) {
-        Usuario usuarioActual = usuarioService.buscarPorNombre(nombreUsuarioActual);
-        return usuarioService.actualizar(usuarioActualizar, usuarioActual, idUsuarioACambiar);
+        if(usuarioService.buscarAdmin(nombreUsuarioActual)) {
+            Usuario usuarioActual = usuarioService.buscarPorNombre(nombreUsuarioActual);
+            return usuarioService.actualizar(usuarioActualizar, usuarioActual, idUsuarioActualizar);
+        }
+        return "Error: No tienes permisos suficientes";
+        
     }
-    */
+   
     
     
 
