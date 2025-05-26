@@ -1,6 +1,8 @@
 package com.vcore.backend_plataforma_web.model;
 
-import java.sql.Date;
+
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +21,7 @@ public class Inscripcion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Date fechaInscripcion;
+    private LocalDate fechaInscripcion;
     private Double precio;
     private Boolean estado;
 

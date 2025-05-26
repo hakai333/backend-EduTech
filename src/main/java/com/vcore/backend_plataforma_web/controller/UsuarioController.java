@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vcore.backend_plataforma_web.model.Usuario;
@@ -22,23 +22,41 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @PostMapping("/test")
+    public String test(@RequestBody Usuario usuario) {
+        return "OK: " + usuario.getNombre();
+    }
+
+    //CREAR USUARIO
     @PostMapping("/crear/{nombreUsuarioActual}")
-    public String crearUsuario(
+    public String almacenar(
         @RequestBody Usuario usuarioAcrear,
         @PathVariable String nombreUsuarioActual
     ) {
-        Usuario usuarioActual = usuarioService.buscarPorNombre(nombreUsuarioActual);
-        if(usuarioActual == null) {
-            return "Usuario actual no existe!";
+        if(usuarioService.buscarAdmin(nombreUsuarioActual)) {
+            Usuario usuarioActual = usuarioService.buscarPorNombre(nombreUsuarioActual);
+            return usuarioService.almacenar(usuarioAcrear, usuarioActual);
         }
-        
-        return usuarioService.almacenar(usuarioAcrear, usuarioActual);
+        return "Error";
     }
     
-    @GetMapping("/listar")
+    @GetMapping("/listar") 
     public List<Usuario> listaUsuarios() {
         return usuarioService.listar();
     }
-
+    
+    //ACTUALIZAR USUARIOf
+    /* @PostMapping("/actualizar/{nombreUsuarioActual}/{idUsuarioActualizar}")
+    public String actualizarUsuario(
+        @RequestBody Usuario usuarioActualizar,
+        @PathVariable String nombreUsuarioActual,
+        @PathVariable Integer idUsuarioACambiar
+    ) {
+        Usuario usuarioActual = usuarioService.buscarPorNombre(nombreUsuarioActual);
+        return usuarioService.actualizar(usuarioActualizar, usuarioActual, idUsuarioACambiar);
+    }
+    */
+    
+    
 
 }

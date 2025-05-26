@@ -1,7 +1,8 @@
 package com.vcore.backend_plataforma_web.model;
 
 
-import java.sql.Date;
+
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Usuario {
     private String nombre;
     private String contrasena;
     private String email;
-    private Date fecha_registro;
+    private LocalDate fecha_registro;
 
     @ManyToOne
     @JoinColumn(name = "rol_id")

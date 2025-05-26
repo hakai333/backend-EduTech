@@ -2,7 +2,7 @@ package com.vcore.backend_plataforma_web.model;
 
 
 
-import java.sql.Date;
+import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -20,6 +20,6 @@ public class Evaluacion {
     @Id
     private Integer Id;
     private String nombreEvaluacion;
-    private Date fechaLimite;
+    private LocalTime fechaLimite;
     private String tipoEvaluacion;
 }

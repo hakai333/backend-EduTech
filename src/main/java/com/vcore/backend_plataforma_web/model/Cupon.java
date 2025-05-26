@@ -1,7 +1,8 @@
 package com.vcore.backend_plataforma_web.model;
 
 
-import java.sql.Date;
+
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,5 +24,5 @@ public class Cupon {
     private Integer id;
     private Double descuento;
     private String codigo;
-    private Date fecha_espiracion;
+    private LocalDate fecha_espiracion;
 }

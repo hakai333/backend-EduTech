@@ -1,7 +1,8 @@
 package com.vcore.backend_plataforma_web.model;
 
 
-import java.sql.Date;
+
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,5 +24,5 @@ public class Incidencia {
     private Integer id;
     private String descripcion;
     private Boolean estado;
-    private Date fechaReporte;
+    private LocalDate fechaReporte;
 }
