@@ -1,0 +1,25 @@
+SRIPTS PARA INGRESAR AL INICIO DEL PROGRAMA
+
+//INSERTAR UN USUARIO DE ROL ADMIN PARA PODER CREAR EL RESTO 
+INSERT INTO usuarios (
+    nombre,
+    contrasena,
+    email,
+    fecha_registro,
+    rol_id
+) VALUES (
+    'juan',
+    'admin123',
+    'admin@empresa.com',
+    CURDATE(),
+    1 -- ID DE ADMIN EN roles
+);
+
+//CON CADA ROL, EN ORDEN 1-admin 2-gerente 3-profesor 4-soporte 5-estudiante
+insert into roles (nombre) values ('admin');
+insert into roles (nombre) values ('gerente');
+insert into roles (nombre) values ('profesor');
+insert into roles (nombre) values ('soporte');
+insert into roles (nombre) values ('estudiante');
+
+Y LUEGO TRABAJAR CON POSTMAN
