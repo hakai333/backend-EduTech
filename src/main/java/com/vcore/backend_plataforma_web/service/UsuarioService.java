@@ -63,8 +63,6 @@ public class UsuarioService {
         return "Usuario almacenado correctamente!";
     }
 
-
-    
     public List<Usuario> listar(){
         return usuarioRepository.findAll();
     }
