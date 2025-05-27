@@ -2,7 +2,7 @@ package com.vcore.backend_plataforma_web.model;
 
 import java.time.LocalDate;
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
@@ -29,7 +29,6 @@ public class Inscripcion {
     private Integer id;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate fechaInscripcion;
-    private Double precio;
     private Boolean estado;//activo o inactivo.
 
     @ManyToOne
@@ -38,6 +37,7 @@ public class Inscripcion {
 
     @ManyToOne
     @JoinColumn(name= "estudiante_id")
+    @JsonBackReference
     private Usuario estudiante;
 
     @PrePersist

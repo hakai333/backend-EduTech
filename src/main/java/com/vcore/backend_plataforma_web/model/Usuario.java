@@ -5,6 +5,8 @@ package com.vcore.backend_plataforma_web.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,6 +38,7 @@ public class Usuario {
     @JoinColumn(name = "rol_id")
     private Rol rol;
 
+//bastian
     @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL)
     private List<Inscripcion> inscripciones;
 }

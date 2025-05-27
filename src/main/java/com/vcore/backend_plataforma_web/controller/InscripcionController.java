@@ -11,6 +11,7 @@ import com.vcore.backend_plataforma_web.service.InscripcionService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 //Bastian
@@ -29,4 +30,9 @@ public class InscripcionController {
     public List <Inscripcion> listar(){
         return inscripcionService.listar();
     }
+
+    @PostMapping("/asignar/{cursoId}/{inscripcionId}")
+        public String inscripcionCurso(@PathVariable int cursoId, @PathVariable int inscripcionId){
+            return inscripcionService.inscripcionCurso(cursoId,inscripcionId);
+        }
 }

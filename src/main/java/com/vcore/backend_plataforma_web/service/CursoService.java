@@ -25,4 +25,5 @@ public class CursoService {
     public List<Curso>listar(){
         return cursoRepository.findAll();
     }
+
 }
