@@ -194,10 +194,8 @@ public class UsuarioService {
     public String asignarRol(Rol rol, Integer idUsuarioActual, Integer idUsuarioAsignar) {
         Usuario usuarioAsignar = usuarioRepository.findById(idUsuarioAsignar).orElse(null);
         Rol rolNuevo = rolRepository.findByNombre(rol.getNombre());
-
         List<Rol> rolesExistentes = rolRepository.findAll();
     
-        // 5. Validar el rol usando for
         boolean rolValido = false;
         for (Rol rolExistente : rolesExistentes) {
             if (rolExistente.getNombre().equalsIgnoreCase(rol.getNombre())) {
@@ -217,10 +215,6 @@ public class UsuarioService {
         if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
             return "Acceso denegado! -- Usuario en @PathVariable no tiene permisos";
         }
-
-
-
-
 
         usuarioAsignar.setRol(rolNuevo);
         usuarioRepository.save(usuarioAsignar);
