@@ -24,6 +24,8 @@ public class Rol {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre; // "ESTUDIANTE", "PROFESOR", "ADMIN", "GERENTE"
+    private List<String> descripcion;
+
 
     @OneToMany(mappedBy = "rol")
     @JsonIgnore

@@ -16,6 +16,10 @@ INSERT INTO usuarios (
 );
 
 //CON CADA ROL, EN ORDEN 1-admin 2-gerente 3-profesor 4-soporte 5-estudiante
+insert into roles (nombre) values ('admin');
+insert into roles (nombre) values ('gerente');
+insert into roles (nombre) values ('profesor');
+insert into roles (nombre) values ('soporte');
 insert into roles (nombre) values ('estudiante');
 
 Y LUEGO TRABAJAR CON POSTMAN

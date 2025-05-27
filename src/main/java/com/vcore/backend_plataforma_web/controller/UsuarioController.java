@@ -40,7 +40,7 @@ public class UsuarioController {
         return "Error";
     }
     
-    @GetMapping("/listar") 
+    @GetMapping 
     public List<Usuario> listaUsuarios() {
         return usuarioService.listar();
     }

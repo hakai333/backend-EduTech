@@ -58,23 +58,27 @@ public class UsuarioService {
         if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
             return "Acceso denegado";
         }
-
-        //verificar el rol si existe
-        Rol rolUsuarioNuevo = rolRepository.findByNombre(usuarioACrear.getRol().getNombre());
-        if(rolUsuarioNuevo == null) {
-            return "Rol no valido";
-        }
-
-        usuarioACrear.setRol(rolUsuarioNuevo);
+        
         usuarioRepository.save(usuarioACrear);
         return "Usuario almacenado correctamente!";
     }
 
+
+    
     public List<Usuario> listar(){
         return usuarioRepository.findAll();
     }
 
-
+    //ADMIN -- ASIGNAR ROL USUARIO
+    public String asignarRol(Usuario usuario, Rol rol, Integer id) {
+        //verificar el rol si existe
+        Rol rolNuevo = rolRepository.findByNombre(rol.getNombre());
+        if(rolNuevo == null) {
+            return "Rol no valido";
+        }
+        usuario.setRol(rolNuevo);
+        return "Rol asignado!";
+    }
     
 
     //ADMIN--ACTUALIZAR USUARIO
