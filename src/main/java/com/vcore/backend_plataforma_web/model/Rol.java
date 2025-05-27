@@ -2,6 +2,7 @@ package com.vcore.backend_plataforma_web.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -26,8 +27,7 @@ public class Rol {
     private String nombre; // "ESTUDIANTE", "PROFESOR", "ADMIN", "GERENTE"
     private List<String> descripcion;
 
-
     @OneToMany(mappedBy = "rol")
-    @JsonIgnore
+    @JsonBackReference
     private List<Usuario> usuarios; 
 }

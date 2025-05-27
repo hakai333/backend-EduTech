@@ -2,8 +2,6 @@ package com.vcore.backend_plataforma_web.service;
 
 import java.util.List;
 
-import javax.swing.event.InternalFrameAdapter;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.vcore.backend_plataforma_web.model.Rol;
@@ -137,7 +135,6 @@ public class UsuarioService {
     //MIGUEL REYES
     //ADMIN--DESACTIVAR USUARIO
     public String desactivarUsuario(Usuario usuarioActual, Integer idUsuarioDesactivar) {
-        // 1. Buscar usuario a desactivar
         Usuario usuarioDesactivar = buscarPorId(idUsuarioDesactivar);
         if(usuarioDesactivar == null) {
             return "Usuario a desactivar no encontrado";
@@ -160,16 +157,14 @@ public class UsuarioService {
     //MIGUEL REYES
     //ADMIN--ELIMINAR USUARIO
     public String eliminarUsuario(Integer idUsuarioActual, Integer idUsuarioAEliminar) {
-    // 1. Verificar usuario actual (quien elimina)
+
     Usuario usuarioActual = usuarioRepository.findById(idUsuarioActual)
         .orElseThrow(() -> new RuntimeException("Usuario actual no encontrado"));
     
-    // 2. Verificar permisos
     if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("ADMIN")) {
         return "Usuario sin permisos";
     }
     
-    // 3. Verificar y obtener usuario a eliminar
     Usuario usuarioAEliminar = usuarioRepository.findById(idUsuarioAEliminar)
         .orElse(null);
     
@@ -177,10 +172,8 @@ public class UsuarioService {
         return "Usuario a eliminar no encontrado!";
     }
     
-    // 4. Ejecutar borrado
     usuarioRepository.delete(usuarioAEliminar);
     
-    // 5. Verificar que realmente se eliminó
     if(!usuarioRepository.existsById(idUsuarioAEliminar)) {
         return "Usuario eliminado";
     } else {

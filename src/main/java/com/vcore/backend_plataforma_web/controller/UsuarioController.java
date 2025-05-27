@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vcore.backend_plataforma_web.model.Rol;
@@ -40,7 +39,7 @@ public class UsuarioController {
         Usuario usuarioActual = usuarioService.buscarPorId(idUsuarioActual);
         String resultado = usuarioService.crearUsuario(usuarioAcrear, usuarioActual);
         if(resultado.equals("Usuario almacenado correctamente")) {
-            return ResponseEntity.ok("Usuario con ID " + usuarioAcrear.getId() + "creado correctamente!");
+            return ResponseEntity.ok("Usuario con ID " + usuarioAcrear.getId() + " creado correctamente!");
         }
         return ResponseEntity.badRequest().body(resultado);
     }
