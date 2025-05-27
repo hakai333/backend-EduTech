@@ -31,24 +31,24 @@ public class UsuarioService {
     public Boolean buscarAdmin(String nombre) {
         List<Usuario> usuarios = usuarioRepository.findAll();
         for(Usuario usuario : usuarios) {
-            if(usuario.getNombre().equals(nombre)) {
-                if( usuario.getRol() != null &&
-                    usuario.getRol().getNombre().equalsIgnoreCase("admin")) {
-                    return true;
-                }
-            }
-            return false;
+            if(usuario.getNombre().equals(nombre) && 
+            usuario.getRol() != null &&
+            usuario.getRol().getNombre().equalsIgnoreCase("admin")) {
+                return true;
+            }           
         }
         return false;
     }
 
-
+    public void eliminarUsuario(Integer id) {
+        usuarioRepository.deleteById(id);
+    }
 
 
 
     //METODOS DE ADMIN
     //ADMIN--CREAR USUARIO
-    public String almacenar(Usuario usuarioACrear, Usuario usuarioActual) {
+    public String crearUsuario(Usuario usuarioACrear, Usuario usuarioActual) {
         //si usuario actual existe
         if(usuarioActual == null) {
             return "Usuario actual no existe!";
@@ -58,7 +58,7 @@ public class UsuarioService {
         if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
             return "Acceso denegado";
         }
-        
+        usuarioACrear.setEsActivo(true);
         usuarioRepository.save(usuarioACrear);
         return "Usuario almacenado correctamente!";
     }
@@ -82,7 +82,7 @@ public class UsuarioService {
     
 
     //ADMIN--ACTUALIZAR USUARIO
-    public String actualizar(Usuario usuarioActualizar, Usuario usuarioActual, Integer id) {
+    public String actualizarUsuario(Usuario usuarioActualizar, Usuario usuarioActual, Integer id) {
         if(usuarioActual == null || usuarioActual.getRol() == null) {
             return "Error: Usuario actual inválido";
         }
@@ -129,14 +129,65 @@ public class UsuarioService {
                 return "Error: El rol especificado no existe";
             }        
         }
+        usuarioACambiar.setEsActivo(true);
         usuarioRepository.save(usuarioACambiar);
         return "Usuario actualizado!";
   
     }
 
     //ADMIN--DESACTIVAR USUARIO
+    public String desactivarUsuario(Usuario usuarioActual, Integer idUsuarioDesactivar) {
+        // 1. Buscar usuario a desactivar
+        Usuario usuarioDesactivar = buscarPorId(idUsuarioDesactivar);
+        if(usuarioDesactivar == null) {
+            return "Usuario a desactivar no encontrado";
+        }
 
+        if (usuarioActual == null || usuarioActual.getRol() == null || 
+        !buscarAdmin(usuarioActual.getNombre())) {
+        return "Usuario sin permisos";
+        }
+
+    
+        // 3. Realizar desactivación
+        usuarioDesactivar.setEsActivo(false);
+        usuarioRepository.save(usuarioDesactivar);
+        Usuario usuarioVerificado = usuarioRepository.findById(idUsuarioDesactivar).orElse(null);
+        if(usuarioVerificado != null && !usuarioVerificado.getEsActivo()) {
+            return "Usuario desactivado";
+        }
+            return "Error al desactivar usuario";
+    }
 
     
     //ADMIN--ELIMINAR USUARIO
+    public String eliminarUsuario(Integer idUsuarioActual, Integer idUsuarioAEliminar) {
+    // 1. Verificar usuario actual (quien elimina)
+    Usuario usuarioActual = usuarioRepository.findById(idUsuarioActual)
+        .orElseThrow(() -> new RuntimeException("Usuario actual no encontrado"));
+    
+    // 2. Verificar permisos
+    if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("ADMIN")) {
+        return "Usuario sin permisos";
+    }
+    
+    // 3. Verificar y obtener usuario a eliminar
+    Usuario usuarioAEliminar = usuarioRepository.findById(idUsuarioAEliminar)
+        .orElse(null);
+    
+    if(usuarioAEliminar == null) {
+        return "Usuario a eliminar no encontrado!";
+    }
+    
+    // 4. Ejecutar borrado
+    usuarioRepository.delete(usuarioAEliminar);
+    
+    // 5. Verificar que realmente se eliminó
+    if(!usuarioRepository.existsById(idUsuarioAEliminar)) {
+        return "Usuario eliminado";
+    } else {
+        return "Error al eliminar usuario";
+    }
+}
+
 }

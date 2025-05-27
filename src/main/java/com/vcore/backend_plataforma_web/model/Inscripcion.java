@@ -24,5 +24,4 @@ public class Inscripcion {
     private LocalDate fechaInscripcion;
     private Double precio;
     private Boolean estado;
-
 }

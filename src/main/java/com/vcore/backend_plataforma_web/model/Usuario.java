@@ -27,6 +27,7 @@ public class Usuario {
     private String nombre;
     private String contrasena;
     private String email;
+    private Boolean esActivo;
     private LocalDate fecha_registro;
 
     @ManyToOne
