@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vcore.backend_plataforma_web.model.Rol;
 import com.vcore.backend_plataforma_web.model.Usuario;
 import com.vcore.backend_plataforma_web.service.UsuarioService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,49 +30,48 @@ public class UsuarioController {
         return "OK: " + usuario.getNombre();
     }
 
-    //CREAR USUARIO
+    //MIGUEL REYES
+    //CREAR USUARIO SERVICE
     @PostMapping("/crear/{idUsuarioActual}")
-    public String crearUsuario(
+    public ResponseEntity<String> crearUsuario(
         @RequestBody Usuario usuarioAcrear,
         @PathVariable Integer idUsuarioActual
     ) {
         Usuario usuarioActual = usuarioService.buscarPorId(idUsuarioActual);
-        if(usuarioService.buscarAdmin(usuarioActual.getNombre())) {
-            return usuarioService.crearUsuario(usuarioAcrear, usuarioActual);
+        String resultado = usuarioService.crearUsuario(usuarioAcrear, usuarioActual);
+        if(resultado.equals("Usuario almacenado correctamente")) {
+            return ResponseEntity.ok("Usuario con ID " + usuarioAcrear.getId() + "creado correctamente!");
         }
-        return "Error, usuario no creado!";
+        return ResponseEntity.badRequest().body(resultado);
     }
 
-    //LISTAR
-    @GetMapping 
-    public List<Usuario> listaUsuarios() {
-        return usuarioService.listar();
-    }
-    
-    //ACTUALIZAR USUARIO
+    //MIGUEL REYES
+    //ACTUALIZAR USUARIO SERVICE
     @PostMapping("/actualizar/{idUsuarioActual}/{idUsuarioActualizar}")
-    public String actualizarUsuario(
+    public ResponseEntity<String> actualizarUsuario(
         @RequestBody Usuario usuarioActualizar,
         @PathVariable Integer idUsuarioActual,
         @PathVariable Integer idUsuarioActualizar
     ) {
         Usuario usuarioActual = usuarioService.buscarPorId(idUsuarioActual);
-        if(usuarioService.buscarAdmin(usuarioActual.getNombre())) {
-            return usuarioService.actualizarUsuario(usuarioActualizar, usuarioActual, idUsuarioActualizar);
+        String resultado = usuarioService.actualizarUsuario(usuarioActualizar, usuarioActual, idUsuarioActualizar);
+        if(resultado.equals("Usuario actualizado")) {
+            return ResponseEntity.ok("Usuario con ID "+ idUsuarioActualizar + " actualizado correctamente!");
         }
-        return "Error: usuario no actualizado!";
+        return ResponseEntity.badRequest().body(resultado);
         
     }
 
+    //MIGUEL REYES
+    //DESACTIVAR USUARIO SERVICE
     @PostMapping("/desactivar/{idUsuarioActual}/{idUsuarioDesactivar}")
     public ResponseEntity<String> desactivarUsuario(
         @PathVariable Integer idUsuarioActual,
         @PathVariable Integer idUsuarioDesactivar
     ) {
-    // Obtener usuario actual (quien ejecuta la acción)
+
     Usuario usuarioActual = usuarioService.buscarPorId(idUsuarioActual);
     
-    // Llamar al service con parámetros en orden correcto
     String resultado = usuarioService.desactivarUsuario(usuarioActual, idUsuarioDesactivar);
     
     if(resultado.equals("Usuario desactivado")) {
@@ -81,7 +81,8 @@ public class UsuarioController {
     }
     
 
-
+    //MIGUEL REYES
+    //ELIMINAR USUARIO SERVICE
     @DeleteMapping("/eliminar/{idUsuarioActual}/{idUsuarioAEliminar}")
     public ResponseEntity<String> eliminarUsuario(
         @PathVariable Integer idUsuarioActual,
@@ -93,10 +94,36 @@ public class UsuarioController {
             return ResponseEntity.ok("Usuario con ID "+ idUsuarioAEliminar + " eliminado correctamente!");
         } else {
             return ResponseEntity.badRequest().body(resultado);
+        }       
+    }
+
+    //MIGUEL REYES
+    //LISTAR
+    @GetMapping 
+    public List<Usuario> listaUsuarios() {
+        return usuarioService.listar();
+    }
+
+    //MIGUEL REYES
+    //ASIGAR ROL O PERMISOS
+    @PostMapping("/asignar-rol/{idUsuarioActual}/{idUsuarioAsignar}")
+    public ResponseEntity<String> asignarUsuario(
+        @RequestBody Rol rol,
+        @PathVariable Integer idUsuarioActual,
+        @PathVariable Integer idUsuarioAsignar
+    ) {    
+        if (rol == null || rol.getNombre() == null) {
+            return ResponseEntity.badRequest().body("Debe proporcionar un rol válido");
         }
-}
-   
+        String resultado = usuarioService.asignarRol(rol, idUsuarioActual, idUsuarioAsignar);
+        if(resultado.equals("Rol asignado")) {
+            return ResponseEntity.ok("Usuario con ID "+ idUsuarioAsignar + " asigando correctamente!");
+        } else {
+            return ResponseEntity.badRequest().body(resultado);
+        }
+    }
     
-    
+
+
 
 }
