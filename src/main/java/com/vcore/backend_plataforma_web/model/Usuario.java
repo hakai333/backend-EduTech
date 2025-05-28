@@ -40,6 +40,6 @@ public class Usuario {
 
 //bastian
     @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonBackReference(value="usuarioInscripcion")
     private List<Inscripcion> inscripciones;
 }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +38,7 @@ public class Inscripcion {
 
     @ManyToOne
     @JoinColumn(name= "estudiante_id")
+    @JsonManagedReference(value="usuarioInscripcion")
     private Usuario estudiante;
 
     @PrePersist
