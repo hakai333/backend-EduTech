@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.vcore.backend_plataforma_web.model.Rol;
 import com.vcore.backend_plataforma_web.model.Usuario;
 import com.vcore.backend_plataforma_web.repository.RolRepository;
@@ -18,7 +19,11 @@ public class UsuarioService {
     @Autowired
     private RolRepository rolRepository;
 
+<<<<<<< HEAD
     //MIGUEL REYES
+=======
+
+>>>>>>> basti
     public Usuario buscarPorId(Integer id) {
         return usuarioRepository.findById(id).orElse(null);
     }
@@ -76,7 +81,26 @@ public class UsuarioService {
         return "Usuario almacenado correctamente";
     }
 
+<<<<<<< HEAD
     //MIGUEL REYES
+=======
+    public List<Usuario> listar(){
+        return usuarioRepository.findAll();
+    }
+
+    //ADMIN -- ASIGNAR ROL USUARIO
+    public String asignarRol(Usuario usuario, Rol rol, Integer id) {
+        //verificar el rol si existe
+        Rol rolNuevo = rolRepository.findByNombre(rol.getNombre());
+        if(rolNuevo == null) {
+            return "Rol no valido";
+        }
+        usuario.setRol(rolNuevo);
+        return "Rol asignado!";
+    }
+    
+
+>>>>>>> basti
     //ADMIN--ACTUALIZAR USUARIO
     public String actualizarUsuario(Usuario usuarioActualizar, Usuario usuarioActual, Integer id) {
         if(usuarioActual == null || usuarioActual.getRol() == null) {
@@ -156,6 +180,7 @@ public class UsuarioService {
 
     //MIGUEL REYES
     //ADMIN--ELIMINAR USUARIO
+<<<<<<< HEAD
     public String eliminarUsuario(Integer idUsuarioActual, Integer idUsuarioAEliminar) {
 
     Usuario usuarioActual = usuarioRepository.findById(idUsuarioActual)
@@ -214,5 +239,7 @@ public class UsuarioService {
         return "Rol asignado";
     }
 
+=======
+>>>>>>> basti
 
 }
