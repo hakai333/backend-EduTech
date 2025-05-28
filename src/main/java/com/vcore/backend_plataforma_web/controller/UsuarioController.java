@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.vcore.backend_plataforma_web.model.Persona;
 import com.vcore.backend_plataforma_web.model.Rol;
 import com.vcore.backend_plataforma_web.model.Usuario;
 import com.vcore.backend_plataforma_web.service.UsuarioService;

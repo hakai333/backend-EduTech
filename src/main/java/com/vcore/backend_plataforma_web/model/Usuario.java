@@ -1,12 +1,7 @@
 package com.vcore.backend_plataforma_web.model;
 
-
-
 import java.time.LocalDate;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,7 +39,7 @@ public class Usuario {
     private List<Incidencia> incidencias;
 
     @OneToOne
-    @JoinColumn(name = "persona_id")  // Nombre de la columna FK en la tabla 'usuarios'
+    @JoinColumn(name = "persona_id")  
     private Persona persona;
 
 //bastian
