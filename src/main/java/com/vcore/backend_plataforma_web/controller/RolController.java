@@ -11,7 +11,7 @@ import com.vcore.backend_plataforma_web.service.RolService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 
@@ -23,7 +23,7 @@ public class RolController {
     @Autowired
     private RolService rolService;
 
-    @PostMapping
+    @PostMapping()
     public String almacenar(@RequestBody Rol rol) {
         return rolService.almacenar(rol);
     }
@@ -33,10 +33,5 @@ public class RolController {
         return rolService.listar();
     }
 
-    @GetMapping("/{nombre}")
-    public List<Rol> buscar(@PathVariable String nombre) {
-        return rolService.buscar(nombre);
-    }
-    
     
 }

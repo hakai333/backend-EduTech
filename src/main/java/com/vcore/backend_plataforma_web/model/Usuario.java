@@ -5,6 +5,8 @@ package com.vcore.backend_plataforma_web.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,6 +39,13 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "rol_id")
     private Rol rol;
+
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
+    private List<Incidencia> incidencias;
+
+    @OneToOne
+    @JoinColumn(name = "persona_id")  // Nombre de la columna FK en la tabla 'usuarios'
+    private Persona persona;
 
 //bastian
     @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL)
