@@ -38,7 +38,6 @@ public class Inscripcion {
 
     @ManyToOne
     @JoinColumn(name= "estudiante_id")
-    @JsonManagedReference(value="usuarioInscripcion")
     private Usuario estudiante;
 
     @PrePersist

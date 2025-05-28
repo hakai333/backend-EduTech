@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -40,6 +41,6 @@ public class Usuario {
 
 //bastian
     @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL)
-    @JsonBackReference(value="usuarioInscripcion")
+    @JsonIgnore  
     private List<Inscripcion> inscripciones;
 }

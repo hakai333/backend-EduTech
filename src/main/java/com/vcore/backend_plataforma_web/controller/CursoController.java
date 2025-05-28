@@ -28,5 +28,4 @@ public class CursoController {
     public List<Curso>listar() {
         return cursoService.listar();
     }
-
 }
