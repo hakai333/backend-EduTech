@@ -10,7 +10,7 @@ import com.vcore.backend_plataforma_web.repository.CuponRepository;
 public class CuponService {
     @Autowired
     private CuponRepository cuponRepository;
-
+    
     public String almacenar(Cupon cupon) {
         cuponRepository.save(cupon);
         return "Cupon ingresado";
@@ -28,5 +28,4 @@ public class CuponService {
             return "Cupon eliminado correctamente!";
         }
     }
-
 }

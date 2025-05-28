@@ -14,7 +14,7 @@ import com.vcore.backend_plataforma_web.repository.InscripcionRepository;
 @Service
 public class InscripcionService {
     @Autowired
-    private final UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
     @Autowired
     private InscripcionRepository inscripcionRepository;
     @Autowired
@@ -26,7 +26,7 @@ public class InscripcionService {
 
     public String almacenar(Inscripcion inscripcion) {
             inscripcionRepository.save(inscripcion);
-        return "Inscripcion exitosa!";
+        return "Inscripcion creada!";
     }
 
     public List<Inscripcion> listar() {
@@ -47,7 +47,7 @@ public class InscripcionService {
             inscripcionRepository.save(inscripcion);
 
             return "Curso "+ curso.getNombre() +
-            " asignado correctamente a inscripcion: " + inscripcion.getId();
+            " asignado correctamente a inscripcion " + inscripcion.getId();
         }
     }
 //inscribir un estudiante
