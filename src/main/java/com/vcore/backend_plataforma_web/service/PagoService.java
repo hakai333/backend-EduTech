@@ -102,7 +102,7 @@ public class PagoService {
         return "El descuento debe ser entre 1% y 99%";
     }
 
-    // Si el pago tiene inscripción con curso y precio definido, aplicar descuento
+    // Si el pago tiene inscripcion con curso y precio definido, aplicar descuento
     if (pago.getInscripcion() != null 
             && pago.getInscripcion().getCurso() != null 
             && pago.getInscripcion().getCurso().getPrecio() != null) {
