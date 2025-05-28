@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
-
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
@@ -27,41 +25,46 @@ public class UsuarioController {
         return "OK: " + usuario.getNombre();
     }
 
-    //CREAR USUARIO
+    // CREAR USUARIO
     @PostMapping("/crear/{nombreUsuarioActual}")
     public String almacenar(
-        @RequestBody Usuario usuarioAcrear,
-        @PathVariable String nombreUsuarioActual
-    ) {
-        if(usuarioService.buscarAdmin(nombreUsuarioActual)) {
+            @RequestBody Usuario usuarioAcrear,
+            @PathVariable String nombreUsuarioActual) {
+        if (usuarioService.buscarAdmin(nombreUsuarioActual)) {
             Usuario usuarioActual = usuarioService.buscarPorNombre(nombreUsuarioActual);
             return usuarioService.almacenar(usuarioAcrear, usuarioActual);
         }
         return "Error";
     }
-    
-    @GetMapping 
+
+    @GetMapping
     public List<Usuario> listaUsuarios() {
         return usuarioService.listar();
     }
-    
-    //ACTUALIZAR USUARIOf
+
+    // ACTUALIZAR USUARIOf
     @PostMapping("/actualizar/{nombreUsuarioActual}/{idUsuarioActualizar}")
     public String actualizarUsuario(
-        @RequestBody Usuario usuarioActualizar,
-        @PathVariable String nombreUsuarioActual,
-        @PathVariable Integer idUsuarioActualizar
-    ) {
-        if(usuarioService.buscarAdmin(nombreUsuarioActual)) {
+            @RequestBody Usuario usuarioActualizar,
+            @PathVariable String nombreUsuarioActual,
+            @PathVariable Integer idUsuarioActualizar) {
+        if (usuarioService.buscarAdmin(nombreUsuarioActual)) {
             Usuario usuarioActual = usuarioService.buscarPorNombre(nombreUsuarioActual);
             return usuarioService.actualizar(usuarioActualizar, usuarioActual, idUsuarioActualizar);
         }
         return "Error: No tienes permisos suficientes";
-        
-        // PULIEeee
-    }
-   
-    
-    
 
+    }
+
+    // PULIE
+    // VER SI USUARIO ES PROFE
+    @GetMapping("/usuarioProfe/{idUsuario}")
+    public Boolean usuarioProfe(@PathVariable Integer idUsuario) {
+        Usuario usuario = usuarioService.buscarPorId(idUsuario);
+        System.out.println("usuario   :" + usuario);
+        if (usuario != null && usuario.getRol() != null) {
+            return usuario.getRol().getNombre().equalsIgnoreCase("profe");
+        }
+        return false;
+    }
 }

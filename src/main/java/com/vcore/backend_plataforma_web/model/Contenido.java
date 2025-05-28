@@ -4,8 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,16 +13,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "cursos")
-public class Curso {
+@Table(name = "contenido")
+public class Contenido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nombre;
-    private String descripcion;
-    private Double precio;
-
-    @ManyToOne
-    @JoinColumn(name = "profesor_id")
-    private Usuario profesor; // Relación con el profesor que imparte el curso
+    private String nombreContenido;
+    private String moduloContenido;
 }
