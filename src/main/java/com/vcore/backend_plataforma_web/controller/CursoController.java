@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vcore.backend_plataforma_web.model.Curso;
 import com.vcore.backend_plataforma_web.service.CursoService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
@@ -27,5 +28,10 @@ public class CursoController {
     @GetMapping
     public List<Curso>listar() {
         return cursoService.listar();
+    }
+
+    @PostMapping("/asignarProfesorACurso/{usuarioId}/{cursoId}")
+    public String asignarProfesor(@PathVariable int usuarioId, @PathVariable int cursoId){
+        return cursoService.asignarProfesor(usuarioId,cursoId);
     }
 }

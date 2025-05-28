@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -34,4 +36,17 @@ public class Curso {
     @OneToMany(mappedBy = "curso",cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Inscripcion> inscripciones;
+
+    @ManyToOne
+    @JoinColumn(name = "profesor_id")
+    private Usuario profesor;
+
+    @OneToMany(mappedBy = "curso")
+    @JsonIgnore
+    private List<Modulo> modulos;
+    
+    @ManyToOne
+    @JoinColumn(name= "Categoria_id")
+    private Categoria categoria;
+    
 }

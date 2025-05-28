@@ -42,4 +42,9 @@ public class Usuario {
     @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL)
     @JsonIgnore  
     private List<Inscripcion> inscripciones;
+
+    @OneToMany(mappedBy = "profesor")
+    @JsonIgnore  
+    private List<Curso> cursos;
+
 }
