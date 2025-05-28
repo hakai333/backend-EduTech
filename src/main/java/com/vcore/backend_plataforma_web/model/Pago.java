@@ -1,5 +1,4 @@
 package com.vcore.backend_plataforma_web.model;
-
 import java.time.LocalDate;
 
 import jakarta.persistence.Table;

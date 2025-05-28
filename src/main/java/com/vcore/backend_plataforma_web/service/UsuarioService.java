@@ -19,11 +19,8 @@ public class UsuarioService {
     @Autowired
     private RolRepository rolRepository;
 
-<<<<<<< HEAD
     //MIGUEL REYES
-=======
 
->>>>>>> basti
     public Usuario buscarPorId(Integer id) {
         return usuarioRepository.findById(id).orElse(null);
     }
@@ -53,11 +50,6 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    //MIGUEL REYES
-    public List<Usuario> listar(){
-        return usuarioRepository.findAll();
-    }
-
     public List<Rol> listarRol() {
         return rolRepository.findAll();
     }
@@ -81,9 +73,7 @@ public class UsuarioService {
         return "Usuario almacenado correctamente";
     }
 
-<<<<<<< HEAD
     //MIGUEL REYES
-=======
     public List<Usuario> listar(){
         return usuarioRepository.findAll();
     }
@@ -100,7 +90,6 @@ public class UsuarioService {
     }
     
 
->>>>>>> basti
     //ADMIN--ACTUALIZAR USUARIO
     public String actualizarUsuario(Usuario usuarioActualizar, Usuario usuarioActual, Integer id) {
         if(usuarioActual == null || usuarioActual.getRol() == null) {
@@ -180,7 +169,6 @@ public class UsuarioService {
 
     //MIGUEL REYES
     //ADMIN--ELIMINAR USUARIO
-<<<<<<< HEAD
     public String eliminarUsuario(Integer idUsuarioActual, Integer idUsuarioAEliminar) {
 
     Usuario usuarioActual = usuarioRepository.findById(idUsuarioActual)
@@ -239,7 +227,5 @@ public class UsuarioService {
         return "Rol asignado";
     }
 
-=======
->>>>>>> basti
 
 }

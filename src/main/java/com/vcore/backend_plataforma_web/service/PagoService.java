@@ -29,8 +29,7 @@ public class PagoService {
     public List<Pago>listar(){
         return pagoRepository.findAll();
     }
-
-//asignar un pago a una inscripcion
+    //asignar un pago a una inscripcion
     public String pagarInscripcion(int inscripcionId, int pagoId) {
     // Validar existencia de inscripcion y pago
     if (!inscripcionRepository.existsById(inscripcionId)) {
