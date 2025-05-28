@@ -26,9 +26,6 @@ public class RolService {
         return rolRepository.findAll();
     }
 
-    public List<Rol> buscar(String nombre) {
-        return rolRepository.findByNombreContaining(nombre);
-    }
 
 
 }

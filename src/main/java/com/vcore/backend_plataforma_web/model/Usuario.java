@@ -5,7 +5,6 @@ package com.vcore.backend_plataforma_web.model;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -44,4 +43,9 @@ public class Usuario {
     @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL)
     @JsonIgnore  
     private List<Inscripcion> inscripciones;
+
+    @OneToMany(mappedBy = "profesor")
+    @JsonIgnore  
+    private List<Curso> cursos;
+
 }

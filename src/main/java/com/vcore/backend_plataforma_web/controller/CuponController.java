@@ -22,14 +22,11 @@ public class CuponController {
 
     @PostMapping
     public String almacenar(@RequestBody Cupon cupon) {
-        return almacenar(cupon);
+        return cuponService.almacenar(cupon);
     }
 
     @GetMapping
     public List<Cupon> listar() {
         return cuponService.listar();
     }
-    
-    
-
 }
