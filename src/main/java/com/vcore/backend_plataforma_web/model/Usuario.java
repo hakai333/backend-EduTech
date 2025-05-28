@@ -41,4 +41,9 @@ public class Usuario {
     @OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Curso> cursos;
+
+    // bastian
+    @OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Inscripcion> inscripciones;
 }
