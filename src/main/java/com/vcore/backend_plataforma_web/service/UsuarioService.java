@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.vcore.backend_plataforma_web.model.Rol;
 import com.vcore.backend_plataforma_web.model.Usuario;
 import com.vcore.backend_plataforma_web.repository.RolRepository;
@@ -17,6 +18,7 @@ public class UsuarioService {
 
     @Autowired
     private RolRepository rolRepository;
+
 
     public Usuario buscarPorId(Integer id) {
         return usuarioRepository.findById(id).orElse(null);
@@ -137,4 +139,5 @@ public class UsuarioService {
 
     
     //ADMIN--ELIMINAR USUARIO
+
 }

@@ -31,8 +31,13 @@ public class InscripcionController {
         return inscripcionService.listar();
     }
 
-    @PostMapping("/asignar/{cursoId}/{inscripcionId}")
+    @PostMapping("/asignarCursoAInscripcion/{cursoId}/{inscripcionId}")
         public String inscripcionCurso(@PathVariable int cursoId, @PathVariable int inscripcionId){
             return inscripcionService.inscripcionCurso(cursoId,inscripcionId);
         }
+
+    @PostMapping("/asignarEstudianteAInscripcion/{usuarioId}/{inscripcionId}")
+    public String inscripcionEstudiante(@PathVariable int usuarioId, @PathVariable int inscripcionId){
+        return inscripcionService.inscripcionEstudiante(usuarioId,inscripcionId);
+    }
 }

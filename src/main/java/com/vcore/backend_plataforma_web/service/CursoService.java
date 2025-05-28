@@ -16,9 +16,9 @@ public class CursoService {
      public String almacenar(Curso curso){
         if(cursoRepository.findByNombre(curso.getNombre())== null){
             cursoRepository.save(curso);
-            return "Curso "+ curso.getNombre()+ "almacenado correctamente";
+            return "Curso "+ curso.getNombre()+ " almacenado correctamente";
         }else{
-            return "Curso "+ curso.getNombre()+ "ya se existe.";
+            return "Curso "+ curso.getNombre()+ " ya se existe.";
         }
     }
 

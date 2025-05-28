@@ -32,5 +32,7 @@ public class Curso {
     private Double precio;
     
     @OneToMany(mappedBy = "curso",cascade = CascadeType.ALL)
+    @JsonBackReference
+
     private List<Inscripcion> inscripciones;
 }

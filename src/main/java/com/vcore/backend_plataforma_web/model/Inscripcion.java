@@ -37,7 +37,6 @@ public class Inscripcion {
 
     @ManyToOne
     @JoinColumn(name= "estudiante_id")
-    @JsonBackReference
     private Usuario estudiante;
 
     @PrePersist
