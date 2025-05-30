@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ReporteDTO {
     private String nombreCurso;
+    private String nombreProfesor;
     private int cantidadAlumnos;
-    private List<String> nombresCompletosAlumnos;
+    private List<String> nombresAlumnos;
 
-    
 }
