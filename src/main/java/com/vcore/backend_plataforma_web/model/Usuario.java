@@ -32,7 +32,7 @@ public class Usuario {
     private String contrasena;
     private String email;
     private Boolean esActivo;
-    private LocalDate fecha_registro;
+    private LocalDate fechaRegistro;
 
     @ManyToOne
     @JoinColumn(name = "rol_id")
