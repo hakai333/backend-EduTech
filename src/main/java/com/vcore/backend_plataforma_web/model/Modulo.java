@@ -2,7 +2,7 @@ package com.vcore.backend_plataforma_web.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,9 +30,10 @@ public class Modulo {
 
     @ManyToOne
     @JoinColumn(name = "curso_id")
+    @JsonIgnore
     private Curso curso;
 
     @OneToMany(mappedBy = "modulo")
-    @JsonManagedReference
+    @JsonIgnore
     private List<Recurso> recursos;
 }

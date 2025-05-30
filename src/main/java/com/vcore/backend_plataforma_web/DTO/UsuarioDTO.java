@@ -39,7 +39,7 @@ public class UsuarioDTO {
             this.nombreUsuario = usuario.getNombre();
             this.email = usuario.getEmail();
             this.estado = usuario.getEsActivo();
-            this.fechaCreacion = usuario.getFecha_registro();
+            this.fechaCreacion = usuario.getFechaRegistro();
 
             if(usuario.getRol() != null){
                 this.rolId = usuario.getRol().getId();
@@ -61,7 +61,7 @@ public class UsuarioDTO {
             this.nombreUsuario = usuario.getNombre();
             this.email = usuario.getEmail();
             this.estado = usuario.getEsActivo();
-            this.fechaCreacion = usuario.getFecha_registro();
+            this.fechaCreacion = usuario.getFechaRegistro();
 
             if(usuario.getRol() != null){
                 this.rolId = usuario.getRol().getId();
