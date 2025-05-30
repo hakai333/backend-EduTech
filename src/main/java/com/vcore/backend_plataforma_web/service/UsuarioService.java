@@ -49,7 +49,7 @@ public class UsuarioService {
         for(Usuario usuario : usuarios) {
             if(usuario.getNombre().equals(nombre) && 
             usuario.getRol() != null &&
-            usuario.getRol().getNombre().equalsIgnoreCase("admin")) {
+            usuario.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
                 return true;
             }           
         }
@@ -69,7 +69,7 @@ public class UsuarioService {
         }
 
         //Si usuario actual no es "admin"
-        if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
+        if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
             return "Acceso denegado";
         }
         usuarioACrear.setEsActivo(true);
@@ -84,7 +84,7 @@ public class UsuarioService {
             return "Error: Usuario actual inválido";
         }
         
-        if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
+        if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
             return "Acceso denegado! -- Usuario en @PathVariable no tiene permisos";
         }
 
@@ -162,7 +162,7 @@ public class UsuarioService {
     Usuario usuarioActual = usuarioRepository.findById(idUsuarioActual)
         .orElseThrow(() -> new RuntimeException("Usuario actual no encontrado"));
     
-    if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("ADMIN")) {
+    if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
         return "Usuario sin permisos";
     }
     
@@ -206,7 +206,7 @@ public class UsuarioService {
         }
 
         Usuario usuarioActual = usuarioRepository.findById(idUsuarioActual).orElse(null);
-        if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
+        if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
             return "Acceso denegado! -- Usuario en @PathVariable no tiene permisos";
         }
 
