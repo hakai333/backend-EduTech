@@ -46,17 +46,10 @@ public class UsuarioService {
     // MIGUEL REYES
     public Boolean buscarAdmin(String nombre) {
         List<Usuario> usuarios = usuarioRepository.findAll();
-<<<<<<< HEAD
-        for(Usuario usuario : usuarios) {
-            if(usuario.getNombre().equals(nombre) && 
-            usuario.getRol() != null &&
-            usuario.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
-=======
         for (Usuario usuario : usuarios) {
             if (usuario.getNombre().equals(nombre) &&
                     usuario.getRol() != null &&
-                    usuario.getRol().getNombre().equalsIgnoreCase("admin")) {
->>>>>>> origin/master
+                    usuario.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
                 return true;
             }
         }
@@ -72,13 +65,8 @@ public class UsuarioService {
             return "Usuario actual no existe!";
         }
 
-<<<<<<< HEAD
-        //Si usuario actual no es "admin"
-        if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
-=======
         // Si usuario actual no es "admin"
-        if (!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
->>>>>>> origin/master
+        if (!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
             return "Acceso denegado";
         }
         usuarioACrear.setEsActivo(true);
@@ -92,13 +80,8 @@ public class UsuarioService {
         if (usuarioActual == null || usuarioActual.getRol() == null) {
             return "Error: Usuario actual inválido";
         }
-<<<<<<< HEAD
-        
-        if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
-=======
 
-        if (!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
->>>>>>> origin/master
+        if (!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
             return "Acceso denegado! -- Usuario en @PathVariable no tiene permisos";
         }
 
@@ -123,8 +106,8 @@ public class UsuarioService {
         if (usuarioActualizar.getEmail() != null) {
             usuarioACambiar.setEmail(usuarioActualizar.getEmail());
         }
-        if (usuarioActualizar.getFecha_registro() != null) {
-            usuarioACambiar.setFecha_registro(usuarioActualizar.getFecha_registro());
+        if (usuarioActualizar.getFechaRegistro() != null) {
+            usuarioACambiar.setFechaRegistro(usuarioActualizar.getFechaRegistro());
         }
         if (usuarioActualizar.getEsActivo() != null) {
             usuarioACambiar.setEsActivo(usuarioActualizar.getEsActivo());
@@ -173,35 +156,10 @@ public class UsuarioService {
     // ADMIN--ELIMINAR USUARIO
     public String eliminarUsuario(Integer idUsuarioActual, Integer idUsuarioAEliminar) {
 
-<<<<<<< HEAD
-    Usuario usuarioActual = usuarioRepository.findById(idUsuarioActual)
-        .orElseThrow(() -> new RuntimeException("Usuario actual no encontrado"));
-    
-    if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
-        return "Usuario sin permisos";
-    }
-    
-    Usuario usuarioAEliminar = usuarioRepository.findById(idUsuarioAEliminar)
-        .orElse(null);
-    
-    if(usuarioAEliminar == null) {
-        return "Usuario a eliminar no encontrado!";
-    }
-    
-    usuarioRepository.delete(usuarioAEliminar);
-    
-    if(!usuarioRepository.existsById(idUsuarioAEliminar)) {
-        return "Usuario eliminado";
-    } else {
-        return "Error al eliminar usuario";
-    }
-}
-=======
         Usuario usuarioActual = usuarioRepository.findById(idUsuarioActual)
                 .orElseThrow(() -> new RuntimeException("Usuario actual no encontrado"));
->>>>>>> origin/master
 
-        if (!usuarioActual.getRol().getNombre().equalsIgnoreCase("ADMIN")) {
+        if (!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
             return "Usuario sin permisos";
         }
 
@@ -244,11 +202,7 @@ public class UsuarioService {
         }
 
         Usuario usuarioActual = usuarioRepository.findById(idUsuarioActual).orElse(null);
-<<<<<<< HEAD
-        if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
-=======
-        if (!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
->>>>>>> origin/master
+        if (!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
             return "Acceso denegado! -- Usuario en @PathVariable no tiene permisos";
         }
 
