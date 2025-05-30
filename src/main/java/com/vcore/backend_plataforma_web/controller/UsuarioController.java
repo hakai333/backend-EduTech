@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.vcore.backend_plataforma_web.DTO.UsuarioDTO;
 import com.vcore.backend_plataforma_web.model.Rol;
 import com.vcore.backend_plataforma_web.model.Usuario;
 import com.vcore.backend_plataforma_web.service.UsuarioService;
@@ -115,6 +117,15 @@ public class UsuarioController {
             return ResponseEntity.badRequest().body(resultado);
         }
     }
- 
+    
+    @GetMapping("/usuarioDto1")
+    public List<UsuarioDTO> obtenerUsuarioPersonaRolDto() {
+        return usuarioService.obtenerUsuarioPersonaRolDto();
+    }
+
+    @GetMapping("/usuarioDto2")
+    public List<UsuarioDTO> obtenerUsuarioRolDto() {
+        return usuarioService.obtenerUsuarioRolDto();
+    }
 
 }

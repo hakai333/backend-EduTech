@@ -1,14 +1,14 @@
 package com.vcore.backend_plataforma_web.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD
 
-=======
+import com.vcore.backend_plataforma_web.DTO.UsuarioDTO;
 import com.vcore.backend_plataforma_web.model.Persona;
->>>>>>> origin/master
+
 import com.vcore.backend_plataforma_web.model.Rol;
 import com.vcore.backend_plataforma_web.model.Usuario;
 import com.vcore.backend_plataforma_web.repository.PersonaRepository;
@@ -49,25 +49,14 @@ public class UsuarioService {
         for(Usuario usuario : usuarios) {
             if(usuario.getNombre().equals(nombre) && 
             usuario.getRol() != null &&
-            usuario.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
+            usuario.getRol().getNombre().equalsIgnoreCase("admin")) {
                 return true;
             }           
         }
         return false;
     }
 
-<<<<<<< HEAD
-    //MIGUEL REYES
-    public void eliminarUsuario(Integer id) {
-        usuarioRepository.deleteById(id);
-    }
-
-    public List<Rol> listarRol() {
-        return rolRepository.findAll();
-    }
-=======
     
->>>>>>> origin/master
 
 
     //MIGUEL REYES
@@ -80,7 +69,7 @@ public class UsuarioService {
         }
 
         //Si usuario actual no es "admin"
-        if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
+        if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
             return "Acceso denegado";
         }
         usuarioACrear.setEsActivo(true);
@@ -89,25 +78,6 @@ public class UsuarioService {
     }
 
     //MIGUEL REYES
-<<<<<<< HEAD
-    public List<Usuario> listar(){
-        return usuarioRepository.findAll();
-    }
-
-    //ADMIN -- ASIGNAR ROL USUARIO
-    public String asignarRol(Usuario usuario, Rol rol, Integer id) {
-        //verificar el rol si existe
-        Rol rolNuevo = rolRepository.findByNombre(rol.getNombre());
-        if(rolNuevo == null) {
-            return "Rol no valido";
-        }
-        usuario.setRol(rolNuevo);
-        return "Rol asignado!";
-    }
-    
-
-=======
->>>>>>> origin/master
     //ADMIN--ACTUALIZAR USUARIO
     public String actualizarUsuario(Usuario usuarioActualizar, Usuario usuarioActual, Integer id) {
         if(usuarioActual == null || usuarioActual.getRol() == null) {
@@ -139,8 +109,8 @@ public class UsuarioService {
         if(usuarioActualizar.getEmail() != null) {
             usuarioACambiar.setEmail(usuarioActualizar.getEmail());
         }
-        if(usuarioActualizar.getFechaRegistro() != null) {
-            usuarioACambiar.setFechaRegistro(usuarioActualizar.getFechaRegistro());
+        if(usuarioActualizar.getFecha_registro() != null) {
+            usuarioACambiar.setFecha_registro(usuarioActualizar.getFecha_registro());
         }
         if(usuarioActualizar.getEsActivo() != null) {
             usuarioACambiar.setEsActivo(usuarioActualizar.getEsActivo());
@@ -282,7 +252,6 @@ public class UsuarioService {
     }
 
 
-
     public List<Usuario> listar(){
         return usuarioRepository.findAll();
     }
@@ -294,6 +263,54 @@ public class UsuarioService {
 
     public List<Rol> listarRol() {
         return rolRepository.findAll();
+    }
+
+    public List<UsuarioDTO> obtenerUsuarioPersonaRolDto() {
+    return usuarioRepository.findAll().stream()
+        .map(usuario -> {
+            UsuarioDTO dto = new UsuarioDTO();
+            // Datos de Usuario
+            dto.setUsuarioId(usuario.getId());
+            dto.setNombreUsuario(usuario.getNombre());
+            dto.setEmail(usuario.getEmail());
+
+            // Datos de Persona (si existe)
+            if(usuario.getPersona() != null) {
+                dto.setPersonaId(usuario.getPersona().getId());
+                dto.setNombre(usuario.getPersona().getNombre());
+                dto.setApellido(usuario.getPersona().getApellido());
+            }
+
+            // Datos de Rol (si existe)
+            if(usuario.getRol() != null) {
+                dto.setRolId(usuario.getRol().getId());
+                dto.setNombreRol(usuario.getRol().getNombre());
+                dto.setDescripcionRol(usuario.getRol().getDescripcion());
+            }
+
+            return dto;
+        })
+        .collect(Collectors.toList());
+    }
+
+    public List<UsuarioDTO> obtenerUsuarioRolDto() {
+    return usuarioRepository.findAll().stream()
+        .map(usuario -> {
+            UsuarioDTO dto = new UsuarioDTO();
+            // Datos de Usuario
+            dto.setUsuarioId(usuario.getId());
+            dto.setNombreUsuario(usuario.getNombre());
+            dto.setEmail(usuario.getEmail());
+
+            // Solo datos de Rol (si existe)
+            if(usuario.getRol() != null) {
+                dto.setRolId(usuario.getRol().getId());
+                dto.setNombreRol(usuario.getRol().getNombre());
+            }
+
+            return dto;
+        })
+        .collect(Collectors.toList());
     }
 
 }

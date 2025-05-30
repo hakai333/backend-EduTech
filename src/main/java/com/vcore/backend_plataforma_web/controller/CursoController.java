@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vcore.backend_plataforma_web.model.Curso;
 import com.vcore.backend_plataforma_web.service.CursoService;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -20,10 +22,11 @@ public class CursoController {
     @Autowired
     private CursoService cursoService;
 
-    @PostMapping 
-    public String almacenar(@RequestBody Curso curso){
+    @PostMapping
+    public ResponseEntity<String> almacenar(@RequestBody Curso curso) {
         return cursoService.almacenar(curso);
     }
+
 
     @GetMapping
     public List<Curso>listar() {
@@ -40,9 +43,12 @@ public class CursoController {
     }
 
     @PostMapping("/asignarProfesorACurso/{usuarioId}/{cursoId}")
-    public String asignarProfesor(@PathVariable int usuarioId, @PathVariable int cursoId){
-        return cursoService.asignarProfesor(usuarioId,cursoId);
+    public ResponseEntity<String> asignarProfesor(@PathVariable int usuarioId, @PathVariable int cursoId) {
+        return cursoService.asignarProfesor(usuarioId, cursoId);
     }
 
-
+    @DeleteMapping("/{cursoiD}")
+    public ResponseEntity <String> eliminarCurso(@PathVariable int cursoId){
+        return cursoService.eliminarCurso(cursoId);
+    }
 }
