@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-
-
 @RestController
 @RequestMapping("/personas")
 public class PersonaController {
@@ -28,7 +25,7 @@ public class PersonaController {
 
     @PostMapping("/lista")
     public ResponseEntity<String> almacenar(@RequestBody List<Persona> personas) {
-        for (Persona persona: personas) {
+        for (Persona persona : personas) {
             personaService.almacenar(persona);
         }
         return ResponseEntity.ok("Personas almacenadas correctamente");
@@ -38,19 +35,9 @@ public class PersonaController {
     public String asignarUsuario(@PathVariable String rutPersona, @PathVariable Integer idUsuario) {
         return personaService.asignarUsuario(rutPersona, idUsuario);
     }
+
     @PostMapping
     public String almacenar(@RequestBody Persona persona) {
         return personaService.almacenar(persona);
     }
-
-    
-
-    
-
-    
-
-    
-
-    
-    
 }

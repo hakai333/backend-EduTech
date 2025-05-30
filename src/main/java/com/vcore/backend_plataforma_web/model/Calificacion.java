@@ -1,34 +1,29 @@
 package com.vcore.backend_plataforma_web.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.persistence.GenerationType;
 
 @Entity
-@Table(name = "recursos")
+@Table(name = "calificaciones")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Recurso {
+public class Calificacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nombreRecurso;
-    private String tipo;
-    private String url;
-    private String descripcion;
+    private Integer nota;
+    private String feedback;
 
-    @ManyToOne
-    @JoinColumn(name = "modulo_id") // nombre de columna en la BDD
-    @JsonBackReference
-    private Modulo modulo;
+    @OneToOne(mappedBy = "calificacion") // relación inversa
+    @JoinColumn(name = "evaluacion_id")
+    private Evaluacion evaluacion;
 }

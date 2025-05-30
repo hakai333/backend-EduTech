@@ -38,19 +38,19 @@ public class Usuario {
     @JoinColumn(name = "rol_id")
     private Rol rol;
 
-    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Incidencia> incidencias;
 
     @OneToOne
-    @JoinColumn(name = "persona_id")  
+    @JoinColumn(name = "persona_id")
     private Persona persona;
 
-//bastian
-    @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL)
+    // bastian
+    @OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Inscripcion> inscripciones;
 
     @OneToMany(mappedBy = "profesor")
-    @JsonIgnore  
+    @JsonIgnore
     private List<Curso> cursos;
 }

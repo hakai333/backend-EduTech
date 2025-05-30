@@ -19,20 +19,20 @@ public class ModuloService {
     @Autowired
     private CursoRepository cursoRepository;
 
-    public String almacenar(Modulo modulo){
-        if(moduloRepository.findByNombre(modulo.getNombre())== null){
+    public String almacenar(Modulo modulo) {
+        if (moduloRepository.findByNombre(modulo.getNombre()) == null) {
             moduloRepository.save(modulo);
-            return "Modulo "+ modulo.getNombre()+ " almacenado correctamente";
-        }else{
-            return "Modulo "+ modulo.getNombre()+ " ya se existe.";
+            return "Modulo " + modulo.getNombre() + " almacenado correctamente";
+        } else {
+            return "Modulo " + modulo.getNombre() + " ya se existe.";
         }
     }
 
-    public List<Modulo>listar(){
-        return  moduloRepository.findAll();
+    public List<Modulo> listar() {
+        return moduloRepository.findAll();
     }
 
-    //asignar Modulo a curso
+    // asignar Modulo a curso
     public String asignarModulo(int moduloId, int cursoId) {
         if (!moduloRepository.existsById(moduloId)) {
             return "El módulo ingresado no existe";
@@ -53,7 +53,7 @@ public class ModuloService {
         }
 
         modulo.setCurso(curso);
-        
+
         if (curso.getModulos() == null) {
             curso.setModulos(new ArrayList<>());
         }

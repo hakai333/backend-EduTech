@@ -32,14 +32,14 @@ public class Inscripcion {
     private Integer id;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate fechaInscripcion;
-    private Boolean estado;//activo o inactivo.
+    private Boolean estado;// activo o inactivo.
 
     @ManyToOne
-    @JoinColumn(name= "curso_id")
+    @JoinColumn(name = "curso_id")
     private Curso curso;
 
     @ManyToOne
-    @JoinColumn(name= "estudiante_id")
+    @JoinColumn(name = "estudiante_id")
     private Usuario estudiante;
 
     @OneToMany(mappedBy = "inscripcion",cascade = CascadeType.ALL)
@@ -50,5 +50,4 @@ public class Inscripcion {
     public void asignarFechaInscripcion() {
         this.fechaInscripcion = LocalDate.now();
     }
-
 }

@@ -30,46 +30,55 @@ public class UsuarioService {
         this.personaRepository = personaRepository;
     }
 
-    //MIGUEL REYES
+    // MIGUEL REYES
 
     public Usuario buscarPorId(Integer id) {
         return usuarioRepository.findById(id).orElse(null);
     }
 
-    //MIGUEL REYES
+    // MIGUEL REYES
     public Usuario buscarPorNombre(String nombre) {
         // Modificado para manejar múltiples resultados
         List<Usuario> usuarios = usuarioRepository.findAllByNombre(nombre);
         return usuarios.isEmpty() ? null : usuarios.get(0); // Devuelve el primero o null
     }
 
-    //MIGUEL REYES
+    // MIGUEL REYES
     public Boolean buscarAdmin(String nombre) {
         List<Usuario> usuarios = usuarioRepository.findAll();
+<<<<<<< HEAD
         for(Usuario usuario : usuarios) {
             if(usuario.getNombre().equals(nombre) && 
             usuario.getRol() != null &&
             usuario.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
+=======
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNombre().equals(nombre) &&
+                    usuario.getRol() != null &&
+                    usuario.getRol().getNombre().equalsIgnoreCase("admin")) {
+>>>>>>> origin/master
                 return true;
-            }           
+            }
         }
         return false;
     }
 
-    
-
-
-    //MIGUEL REYES
-    //METODOS DE ADMIN
-    //ADMIN--CREAR USUARIO
+    // MIGUEL REYES
+    // METODOS DE ADMIN
+    // ADMIN--CREAR USUARIO
     public String crearUsuario(Usuario usuarioACrear, Usuario usuarioActual) {
-        //si usuario actual existe
-        if(usuarioActual == null) {
+        // si usuario actual existe
+        if (usuarioActual == null) {
             return "Usuario actual no existe!";
         }
 
+<<<<<<< HEAD
         //Si usuario actual no es "admin"
         if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
+=======
+        // Si usuario actual no es "admin"
+        if (!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
+>>>>>>> origin/master
             return "Acceso denegado";
         }
         usuarioACrear.setEsActivo(true);
@@ -77,18 +86,23 @@ public class UsuarioService {
         return "Usuario almacenado correctamente";
     }
 
-    //MIGUEL REYES
-    //ADMIN--ACTUALIZAR USUARIO
+    // MIGUEL REYES
+    // ADMIN--ACTUALIZAR USUARIO
     public String actualizarUsuario(Usuario usuarioActualizar, Usuario usuarioActual, Integer id) {
-        if(usuarioActual == null || usuarioActual.getRol() == null) {
+        if (usuarioActual == null || usuarioActual.getRol() == null) {
             return "Error: Usuario actual inválido";
         }
+<<<<<<< HEAD
         
         if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
+=======
+
+        if (!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
+>>>>>>> origin/master
             return "Acceso denegado! -- Usuario en @PathVariable no tiene permisos";
         }
 
-        if(usuarioActualizar == null) {
+        if (usuarioActualizar == null) {
             return "Error: Datos de usuario no proporcionados";
         }
 
@@ -97,68 +111,69 @@ public class UsuarioService {
         }
 
         Usuario usuarioACambiar = usuarioRepository.findById(id).orElse(null);
-        if(usuarioACambiar == null) {
+        if (usuarioACambiar == null) {
             return "Usuario no existe!";
-        } 
-        if(usuarioActualizar.getNombre() != null) {
+        }
+        if (usuarioActualizar.getNombre() != null) {
             usuarioACambiar.setNombre(usuarioActualizar.getNombre());
         }
-        if(usuarioActualizar.getContrasena() != null) {
+        if (usuarioActualizar.getContrasena() != null) {
             usuarioACambiar.setContrasena(usuarioActualizar.getContrasena());
         }
-        if(usuarioActualizar.getEmail() != null) {
+        if (usuarioActualizar.getEmail() != null) {
             usuarioACambiar.setEmail(usuarioActualizar.getEmail());
         }
-        if(usuarioActualizar.getFecha_registro() != null) {
+        if (usuarioActualizar.getFecha_registro() != null) {
             usuarioACambiar.setFecha_registro(usuarioActualizar.getFecha_registro());
         }
-        if(usuarioActualizar.getEsActivo() != null) {
+        if (usuarioActualizar.getEsActivo() != null) {
             usuarioACambiar.setEsActivo(usuarioActualizar.getEsActivo());
         }
-        
-        //verifica que el rol nuevo no sea null y que el nombre del rol no sea null
-        if (usuarioActualizar.getRol() != null && usuarioActualizar.getRol().getNombre() != null) {          
-            //INGRESA EL ROL A ACTUALIZAR A nuevoRol para ver si es null
-            Rol nuevoRol = rolRepository.findByNombre(usuarioActualizar.getRol().getNombre());  
-            //SI NO ES NULL, LE INGRESARA EL ROL A usuario a cambiar
+
+        // verifica que el rol nuevo no sea null y que el nombre del rol no sea null
+        if (usuarioActualizar.getRol() != null && usuarioActualizar.getRol().getNombre() != null) {
+            // INGRESA EL ROL A ACTUALIZAR A nuevoRol para ver si es null
+            Rol nuevoRol = rolRepository.findByNombre(usuarioActualizar.getRol().getNombre());
+            // SI NO ES NULL, LE INGRESARA EL ROL A usuario a cambiar
             if (nuevoRol != null) {
-            usuarioACambiar.setRol(nuevoRol);
+                usuarioACambiar.setRol(nuevoRol);
             } else {
                 return "Error: El rol especificado no existe";
-            }        
+            }
         }
 
         usuarioRepository.save(usuarioACambiar);
         return "Usuario actualizado";
-  
+
     }
 
-    //MIGUEL REYES
-    //ADMIN--DESACTIVAR USUARIO
+    // MIGUEL REYES
+    // ADMIN--DESACTIVAR USUARIO
     public String desactivarUsuario(Usuario usuarioActual, Integer idUsuarioDesactivar) {
         Usuario usuarioDesactivar = buscarPorId(idUsuarioDesactivar);
-        if(usuarioDesactivar == null) {
+        if (usuarioDesactivar == null) {
             return "Usuario a desactivar no encontrado";
         }
 
-        if (usuarioActual == null || usuarioActual.getRol() == null || 
-        !buscarAdmin(usuarioActual.getNombre())) {
-        return "Usuario sin permisos";
+        if (usuarioActual == null || usuarioActual.getRol() == null ||
+                !buscarAdmin(usuarioActual.getNombre())) {
+            return "Usuario sin permisos";
         }
 
         usuarioDesactivar.setEsActivo(false);
         usuarioRepository.save(usuarioDesactivar);
         Usuario usuarioVerificado = usuarioRepository.findById(idUsuarioDesactivar).orElse(null);
-        if(usuarioVerificado != null && !usuarioVerificado.getEsActivo()) {
+        if (usuarioVerificado != null && !usuarioVerificado.getEsActivo()) {
             return "Usuario desactivado";
         }
-            return "Error al desactivar usuario";
+        return "Error al desactivar usuario";
     }
 
-    //MIGUEL REYES
-    //ADMIN--ELIMINAR USUARIO
+    // MIGUEL REYES
+    // ADMIN--ELIMINAR USUARIO
     public String eliminarUsuario(Integer idUsuarioActual, Integer idUsuarioAEliminar) {
 
+<<<<<<< HEAD
     Usuario usuarioActual = usuarioRepository.findById(idUsuarioActual)
         .orElseThrow(() -> new RuntimeException("Usuario actual no encontrado"));
     
@@ -181,15 +196,38 @@ public class UsuarioService {
         return "Error al eliminar usuario";
     }
 }
+=======
+        Usuario usuarioActual = usuarioRepository.findById(idUsuarioActual)
+                .orElseThrow(() -> new RuntimeException("Usuario actual no encontrado"));
+>>>>>>> origin/master
 
+        if (!usuarioActual.getRol().getNombre().equalsIgnoreCase("ADMIN")) {
+            return "Usuario sin permisos";
+        }
 
-    //MIGUEL REYES
-    //ADMIN -- ASIGNAR ROL USUARIO
+        Usuario usuarioAEliminar = usuarioRepository.findById(idUsuarioAEliminar)
+                .orElse(null);
+
+        if (usuarioAEliminar == null) {
+            return "Usuario a eliminar no encontrado!";
+        }
+
+        usuarioRepository.delete(usuarioAEliminar);
+
+        if (!usuarioRepository.existsById(idUsuarioAEliminar)) {
+            return "Usuario eliminado";
+        } else {
+            return "Error al eliminar usuario";
+        }
+    }
+
+    // MIGUEL REYES
+    // ADMIN -- ASIGNAR ROL USUARIO
     public String asignarRol(Rol rol, Integer idUsuarioActual, Integer idUsuarioAsignar) {
         Usuario usuarioAsignar = usuarioRepository.findById(idUsuarioAsignar).orElse(null);
         Rol rolNuevo = rolRepository.findByNombre(rol.getNombre());
         List<Rol> rolesExistentes = rolRepository.findAll();
-    
+
         boolean rolValido = false;
         for (Rol rolExistente : rolesExistentes) {
             if (rolExistente.getNombre().equalsIgnoreCase(rol.getNombre())) {
@@ -200,13 +238,17 @@ public class UsuarioService {
                 break;
             }
         }
-    
+
         if (!rolValido) {
             return "Rol no válido o no existe";
         }
 
         Usuario usuarioActual = usuarioRepository.findById(idUsuarioActual).orElse(null);
+<<<<<<< HEAD
         if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
+=======
+        if (!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
+>>>>>>> origin/master
             return "Acceso denegado! -- Usuario en @PathVariable no tiene permisos";
         }
 
@@ -215,48 +257,44 @@ public class UsuarioService {
         return "Rol asignado";
     }
 
-
-    //PERSONA   
-    public String asignarPersona(Integer idUsuario, Persona persona) { 
-        if(!usuarioRepository.existsById(idUsuario)) {
+    // PERSONA
+    public String asignarPersona(Integer idUsuario, Persona persona) {
+        if (!usuarioRepository.existsById(idUsuario)) {
             return "El usuario no existe";
-        } else if(!personaRepository.existsById(persona.getId())) {
+        } else if (!personaRepository.existsById(persona.getId())) {
             return "La persona no existe";
         } else {
             Usuario usuario = usuarioRepository.findById(idUsuario).get();
             usuario.setPersona(persona);
             personaRepository.save(persona);
-            return "Usuario asignado"; 
-        }       
+            return "Usuario asignado";
+        }
     }
 
-    public String asignarPersona(Persona dto) { 
-        if(!usuarioRepository.existsById(dto.getId())) {
+    public String asignarPersona(Persona dto) {
+        if (!usuarioRepository.existsById(dto.getId())) {
             return "El usuario no existe";
-        } else if(!personaRepository.existsById(dto.getId())) {
+        } else if (!personaRepository.existsById(dto.getId())) {
             return "La persona no existe";
         } else {
             Usuario usuario = usuarioRepository.findById(dto.getId()).get();
             Persona persona = personaRepository.findById(dto.getId()).get();
             usuario.setPersona(persona);
             usuarioRepository.save(usuario);
-            return "Usuario asignado"; 
-        }       
+            return "Usuario asignado";
+        }
     }
 
-
-    //sin validaciones
+    // sin validaciones
     public String almacenar(Usuario usuario) {
         usuarioRepository.save(usuario);
         return "Usuario creado exitosamente";
     }
 
-
-    public List<Usuario> listar(){
+    public List<Usuario> listar() {
         return usuarioRepository.findAll();
     }
-    
-    
+
     public void eliminarUsuario(Integer id) {
         usuarioRepository.deleteById(id);
     }
@@ -266,51 +304,51 @@ public class UsuarioService {
     }
 
     public List<UsuarioDTO> obtenerUsuarioPersonaRolDto() {
-    return usuarioRepository.findAll().stream()
-        .map(usuario -> {
-            UsuarioDTO dto = new UsuarioDTO();
-            // Datos de Usuario
-            dto.setUsuarioId(usuario.getId());
-            dto.setNombreUsuario(usuario.getNombre());
-            dto.setEmail(usuario.getEmail());
+        return usuarioRepository.findAll().stream()
+                .map(usuario -> {
+                    UsuarioDTO dto = new UsuarioDTO();
+                    // Datos de Usuario
+                    dto.setUsuarioId(usuario.getId());
+                    dto.setNombreUsuario(usuario.getNombre());
+                    dto.setEmail(usuario.getEmail());
 
-            // Datos de Persona (si existe)
-            if(usuario.getPersona() != null) {
-                dto.setPersonaId(usuario.getPersona().getId());
-                dto.setNombre(usuario.getPersona().getNombre());
-                dto.setApellido(usuario.getPersona().getApellido());
-            }
+                    // Datos de Persona (si existe)
+                    if (usuario.getPersona() != null) {
+                        dto.setPersonaId(usuario.getPersona().getId());
+                        dto.setNombre(usuario.getPersona().getNombre());
+                        dto.setApellido(usuario.getPersona().getApellido());
+                    }
 
-            // Datos de Rol (si existe)
-            if(usuario.getRol() != null) {
-                dto.setRolId(usuario.getRol().getId());
-                dto.setNombreRol(usuario.getRol().getNombre());
-                dto.setDescripcionRol(usuario.getRol().getDescripcion());
-            }
+                    // Datos de Rol (si existe)
+                    if (usuario.getRol() != null) {
+                        dto.setRolId(usuario.getRol().getId());
+                        dto.setNombreRol(usuario.getRol().getNombre());
+                        dto.setDescripcionRol(usuario.getRol().getDescripcion());
+                    }
 
-            return dto;
-        })
-        .collect(Collectors.toList());
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
 
     public List<UsuarioDTO> obtenerUsuarioRolDto() {
-    return usuarioRepository.findAll().stream()
-        .map(usuario -> {
-            UsuarioDTO dto = new UsuarioDTO();
-            // Datos de Usuario
-            dto.setUsuarioId(usuario.getId());
-            dto.setNombreUsuario(usuario.getNombre());
-            dto.setEmail(usuario.getEmail());
+        return usuarioRepository.findAll().stream()
+                .map(usuario -> {
+                    UsuarioDTO dto = new UsuarioDTO();
+                    // Datos de Usuario
+                    dto.setUsuarioId(usuario.getId());
+                    dto.setNombreUsuario(usuario.getNombre());
+                    dto.setEmail(usuario.getEmail());
 
-            // Solo datos de Rol (si existe)
-            if(usuario.getRol() != null) {
-                dto.setRolId(usuario.getRol().getId());
-                dto.setNombreRol(usuario.getRol().getNombre());
-            }
+                    // Solo datos de Rol (si existe)
+                    if (usuario.getRol() != null) {
+                        dto.setRolId(usuario.getRol().getId());
+                        dto.setNombreRol(usuario.getRol().getNombre());
+                    }
 
-            return dto;
-        })
-        .collect(Collectors.toList());
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
 
 }
