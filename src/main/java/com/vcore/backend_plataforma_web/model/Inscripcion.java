@@ -2,7 +2,6 @@ package com.vcore.backend_plataforma_web.model;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
@@ -43,9 +42,4 @@ public class Inscripcion {
     public void asignarFechaInscripcion() {
         this.fechaInscripcion = LocalDate.now();
     }
-
-    // pulie
-    @ManyToOne
-    @JoinColumn(name = "estudiante_id")
-    private Usuario estudiante;
 }
