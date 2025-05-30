@@ -4,20 +4,31 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+<<<<<<< HEAD
 
+=======
+import com.vcore.backend_plataforma_web.model.Persona;
+>>>>>>> origin/master
 import com.vcore.backend_plataforma_web.model.Rol;
 import com.vcore.backend_plataforma_web.model.Usuario;
+import com.vcore.backend_plataforma_web.repository.PersonaRepository;
 import com.vcore.backend_plataforma_web.repository.RolRepository;
 import com.vcore.backend_plataforma_web.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
-
     @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Autowired
     private RolRepository rolRepository;
+
+    @Autowired
+    private PersonaRepository personaRepository;
+
+    UsuarioService(PersonaRepository personaRepository) {
+        this.personaRepository = personaRepository;
+    }
 
     //MIGUEL REYES
 
@@ -45,6 +56,7 @@ public class UsuarioService {
         return false;
     }
 
+<<<<<<< HEAD
     //MIGUEL REYES
     public void eliminarUsuario(Integer id) {
         usuarioRepository.deleteById(id);
@@ -53,6 +65,9 @@ public class UsuarioService {
     public List<Rol> listarRol() {
         return rolRepository.findAll();
     }
+=======
+    
+>>>>>>> origin/master
 
 
     //MIGUEL REYES
@@ -74,6 +89,7 @@ public class UsuarioService {
     }
 
     //MIGUEL REYES
+<<<<<<< HEAD
     public List<Usuario> listar(){
         return usuarioRepository.findAll();
     }
@@ -90,6 +106,8 @@ public class UsuarioService {
     }
     
 
+=======
+>>>>>>> origin/master
     //ADMIN--ACTUALIZAR USUARIO
     public String actualizarUsuario(Usuario usuarioActualizar, Usuario usuarioActual, Integer id) {
         if(usuarioActual == null || usuarioActual.getRol() == null) {
@@ -227,5 +245,55 @@ public class UsuarioService {
         return "Rol asignado";
     }
 
+
+    //PERSONA   
+    public String asignarPersona(Integer idUsuario, Persona persona) { 
+        if(!usuarioRepository.existsById(idUsuario)) {
+            return "El usuario no existe";
+        } else if(!personaRepository.existsById(persona.getId())) {
+            return "La persona no existe";
+        } else {
+            Usuario usuario = usuarioRepository.findById(idUsuario).get();
+            usuario.setPersona(persona);
+            personaRepository.save(persona);
+            return "Usuario asignado"; 
+        }       
+    }
+
+    public String asignarPersona(Persona dto) { 
+        if(!usuarioRepository.existsById(dto.getId())) {
+            return "El usuario no existe";
+        } else if(!personaRepository.existsById(dto.getId())) {
+            return "La persona no existe";
+        } else {
+            Usuario usuario = usuarioRepository.findById(dto.getId()).get();
+            Persona persona = personaRepository.findById(dto.getId()).get();
+            usuario.setPersona(persona);
+            usuarioRepository.save(usuario);
+            return "Usuario asignado"; 
+        }       
+    }
+
+
+    //sin validaciones
+    public String almacenar(Usuario usuario) {
+        usuarioRepository.save(usuario);
+        return "Usuario creado exitosamente";
+    }
+
+
+
+    public List<Usuario> listar(){
+        return usuarioRepository.findAll();
+    }
+    
+    
+    public void eliminarUsuario(Integer id) {
+        usuarioRepository.deleteById(id);
+    }
+
+    public List<Rol> listarRol() {
+        return rolRepository.findAll();
+    }
 
 }

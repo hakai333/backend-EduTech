@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.vcore.backend_plataforma_web.model.Rol;
 import com.vcore.backend_plataforma_web.model.Usuario;
 import com.vcore.backend_plataforma_web.service.UsuarioService;
@@ -24,10 +23,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/test")
-    public String test(@RequestBody Usuario usuario) {
-        return "OK: " + usuario.getNombre();
-    }
+    
 
     //MIGUEL REYES
     //CREAR USUARIO SERVICE
@@ -95,9 +91,6 @@ public class UsuarioController {
             return ResponseEntity.badRequest().body(resultado);
         }       
     }
-
-    //MIGUEL REYES
-    //LISTAR
     @GetMapping 
     public List<Usuario> listaUsuarios() {
         return usuarioService.listar();
@@ -122,8 +115,6 @@ public class UsuarioController {
             return ResponseEntity.badRequest().body(resultado);
         }
     }
-    
-
-
+ 
 
 }

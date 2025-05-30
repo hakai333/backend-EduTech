@@ -32,7 +32,7 @@ public class Usuario {
     private String contrasena;
     private String email;
     private Boolean esActivo;
-    private LocalDate FechaRegistro;
+    private LocalDate fecha_registro;
 
     @ManyToOne
     @JoinColumn(name = "rol_id")
@@ -47,11 +47,10 @@ public class Usuario {
 
 //bastian
     @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL)
-    @JsonIgnore  
+    @JsonIgnore
     private List<Inscripcion> inscripciones;
 
     @OneToMany(mappedBy = "profesor")
     @JsonIgnore  
     private List<Curso> cursos;
-
 }

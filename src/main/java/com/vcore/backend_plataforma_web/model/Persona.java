@@ -32,6 +32,7 @@ public class Persona {
     private String telefono;
     private LocalDate fechaNacimiento;  
 
+
     @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
     @JsonIgnore
     private Usuario usuario;
