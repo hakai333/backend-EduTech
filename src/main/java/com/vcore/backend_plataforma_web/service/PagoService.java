@@ -11,6 +11,7 @@ import com.vcore.backend_plataforma_web.model.Pago;
 import com.vcore.backend_plataforma_web.repository.CuponRepository;
 import com.vcore.backend_plataforma_web.repository.InscripcionRepository;
 import com.vcore.backend_plataforma_web.repository.PagoRepository;
+
 //bastian
 @Service
 public class PagoService {
@@ -115,7 +116,7 @@ public String pagarInscripcion(int inscripcionId, int pagoId) {
         return "El descuento debe ser entre 1% y 99%";
     }
 
-    // Si el pago tiene una inscripcion con curso y precio definido, aplicar descuento
+    // Si el pago tiene una inscripcion con curso y precio, aplicar descuento
     if (pago.getInscripcion() != null 
             && pago.getInscripcion().getCurso() != null 
             && pago.getInscripcion().getCurso().getPrecio() != null) {

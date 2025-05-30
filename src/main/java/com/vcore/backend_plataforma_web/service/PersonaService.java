@@ -10,6 +10,7 @@ import com.vcore.backend_plataforma_web.model.Usuario;
 import com.vcore.backend_plataforma_web.repository.PersonaRepository;
 import com.vcore.backend_plataforma_web.repository.UsuarioRepository;
 
+//bastian
 @Service
 public class PersonaService {
     @Autowired

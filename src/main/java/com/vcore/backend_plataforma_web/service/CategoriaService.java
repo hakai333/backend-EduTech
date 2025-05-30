@@ -9,6 +9,7 @@ import com.vcore.backend_plataforma_web.model.Curso;
 import com.vcore.backend_plataforma_web.model.Categoria;
 import com.vcore.backend_plataforma_web.repository.CategoriaRepository;
 import com.vcore.backend_plataforma_web.repository.CursoRepository;
+
 //bastian
 @Service
 public class CategoriaService {

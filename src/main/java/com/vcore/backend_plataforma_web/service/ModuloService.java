@@ -10,6 +10,7 @@ import com.vcore.backend_plataforma_web.model.Curso;
 import com.vcore.backend_plataforma_web.model.Modulo;
 import com.vcore.backend_plataforma_web.repository.CursoRepository;
 import com.vcore.backend_plataforma_web.repository.ModuloRepository;
+
 //bastian
 @Service
 public class ModuloService {

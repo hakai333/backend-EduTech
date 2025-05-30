@@ -4,7 +4,6 @@ package com.vcore.backend_plataforma_web.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -42,8 +41,8 @@ public class Curso {
     @JoinColumn(name = "profesor_id")
     private Usuario profesor;
 
-    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "curso")
+    @JsonIgnore
     private List<Modulo> modulos;
     
     @ManyToOne

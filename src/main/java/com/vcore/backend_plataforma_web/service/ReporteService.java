@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.vcore.backend_plataforma_web.DTO.ReporteDTO;
 import com.vcore.backend_plataforma_web.repository.CursoRepository;
-
+//bastian
 @Service
 public class ReporteService {
     

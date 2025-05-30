@@ -3,7 +3,6 @@ package com.vcore.backend_plataforma_web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,13 +14,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 
+
+
+
 @RestController
 @RequestMapping("/roles")
 public class RolController {
     @Autowired
     private RolService rolService;
 
-    @PostMapping
+    @PostMapping()
     public String almacenar(@RequestBody Rol rol) {
         return rolService.almacenar(rol);
     }
@@ -30,13 +32,6 @@ public class RolController {
     public List<Rol> listar() {
         return rolService.listar();
     }
-    
-    @PostMapping("/lista")
-    public ResponseEntity<String> almacenar(@RequestBody List<Rol> roles) {
-        for (Rol rol : roles) {
-            rolService.almacenar(rol);
-        }
-        return ResponseEntity.ok("Roles almacenados correctamente");
-    }
 
+    
 }
