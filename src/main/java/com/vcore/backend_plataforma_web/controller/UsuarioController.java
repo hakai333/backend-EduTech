@@ -102,6 +102,7 @@ public class UsuarioController {
     public List<Usuario> listaUsuarios() {
         return usuarioService.listar();
     }
+        
 
     //MIGUEL REYES
     //ASIGAR ROL O PERMISOS

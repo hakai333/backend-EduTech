@@ -44,6 +44,6 @@ public class CategoriaService {
             cursoRepository.save(curso);
 
         return "El curso '" + curso.getNombre() + "' fue asignado correctamente a la categoría '" + categoria.getNombre() + "'";
-    }
+        }
     }
 }

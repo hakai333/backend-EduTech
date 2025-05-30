@@ -38,7 +38,7 @@ public class UsuarioService {
         for(Usuario usuario : usuarios) {
             if(usuario.getNombre().equals(nombre) && 
             usuario.getRol() != null &&
-            usuario.getRol().getNombre().equalsIgnoreCase("admin")) {
+            usuario.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
                 return true;
             }           
         }
@@ -65,7 +65,7 @@ public class UsuarioService {
         }
 
         //Si usuario actual no es "admin"
-        if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("admin")) {
+        if(!usuarioActual.getRol().getNombre().equalsIgnoreCase("Administrador del sistema")) {
             return "Acceso denegado";
         }
         usuarioACrear.setEsActivo(true);
@@ -121,8 +121,8 @@ public class UsuarioService {
         if(usuarioActualizar.getEmail() != null) {
             usuarioACambiar.setEmail(usuarioActualizar.getEmail());
         }
-        if(usuarioActualizar.getFecha_registro() != null) {
-            usuarioACambiar.setFecha_registro(usuarioActualizar.getFecha_registro());
+        if(usuarioActualizar.getFechaRegistro() != null) {
+            usuarioACambiar.setFechaRegistro(usuarioActualizar.getFechaRegistro());
         }
         if(usuarioActualizar.getEsActivo() != null) {
             usuarioACambiar.setEsActivo(usuarioActualizar.getEsActivo());

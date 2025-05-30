@@ -3,6 +3,7 @@ package com.vcore.backend_plataforma_web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +31,15 @@ public class ModuloController {
     public List<Modulo> listar (){
         return moduloService.listar();
     }
+
+    @PostMapping("/lista")
+    public ResponseEntity<String> almacenar(@RequestBody List<Modulo> modulos) {
+        for (Modulo modulo : modulos) {
+            moduloService.almacenar(modulo);
+        }
+        return ResponseEntity.ok("Modulos creados correctamente");
+    }
+
 
     @PostMapping("/asignarModuloACurso/{moduloId}/{cursoId}")
     public String asignarModulo(@PathVariable int moduloId, @PathVariable int cursoId) {

@@ -5,6 +5,7 @@ package com.vcore.backend_plataforma_web.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -15,6 +16,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,7 +36,8 @@ public class Usuario {
     private String contrasena;
     private String email;
     private Boolean esActivo;
-    private LocalDate fecha_registro;
+    @JsonFormat (pattern="dd-MM-yyyy")
+    private LocalDate fechaRegistro;
 
     @ManyToOne
     @JoinColumn(name = "rol_id")
@@ -47,5 +51,13 @@ public class Usuario {
     @OneToMany(mappedBy = "profesor")
     @JsonIgnore  
     private List<Curso> cursos;
+    
+    @OneToOne
+    @JoinColumn(name = "persona_id")
+    private Persona persona;
 
+    @PrePersist
+    public void FechaRegistroUsuario() {
+        this.fechaRegistro = LocalDate.now();
+    }
 }

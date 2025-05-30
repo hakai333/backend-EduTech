@@ -29,11 +29,11 @@ public class PagoService {
     public List<Pago>listar(){
         return pagoRepository.findAll();
     }
-    //asignar un pago a una inscripcion
-    public String pagarInscripcion(int inscripcionId, int pagoId) {
-    // Validar existencia de inscripcion y pago
+
+// asignar un pago a una inscripcion
+public String pagarInscripcion(int inscripcionId, int pagoId) {
     if (!inscripcionRepository.existsById(inscripcionId)) {
-        return "La inscripcion ingresada no existe";
+        return "La inscripción ingresada no existe";
     }
     if (!pagoRepository.existsById(pagoId)) {
         return "El pago aún no ha sido realizado";
@@ -42,12 +42,19 @@ public class PagoService {
     Inscripcion inscripcion = inscripcionRepository.findById(inscripcionId).get();
     Pago pago = pagoRepository.findById(pagoId).get();
     
-    // Validaciones basicas
-    if (inscripcion.getEstudiante() == null || inscripcion.getCurso() == null) {
-        return "La inscripcion no tiene estudiante o curso asociado";
+      //si inscripcion ya tiene un pago asociado
+    boolean inscripcionYaPagada = pagoRepository.existsByInscripcionId(inscripcionId);
+    if (inscripcionYaPagada) {
+        return "La inscripción ya está pagada";
     }
+    
+    // si pago ya esta asignado a otra inscripcion
     if (pago.getInscripcion() != null) {
-        return "El pago ya está asignado a otra inscripcion";
+        return "El pago ya está asignado a otra inscripción";
+    }
+    
+    if (inscripcion.getEstudiante() == null || inscripcion.getCurso() == null) {
+        return "La inscripción no tiene estudiante o curso asociado";
     }
     if (pago.getMonto() <= 0) {
         return "Pago rechazado, debe ser por un monto mayor a 0";
@@ -56,17 +63,17 @@ public class PagoService {
     // Aplicar descuento si existe cupon
     if (pago.getCupon() != null && pago.getCupon().getDescuento() != null) {
         double descuento = pago.getCupon().getDescuento();
-        if (descuento >= 1 && descuento <= 99) {  // Validar rango de descuento
+        if (descuento >= 1 && descuento <= 99) {
             double montoConDescuento = pago.getMonto() * (1 - (descuento / 100));
             pago.setMonto(montoConDescuento);
         }
     }
 
-    // Asignar pago a inscripcion
+    // Asignar pago a la inscripcion
     pago.setInscripcion(inscripcion);
     pagoRepository.save(pago);
 
-    // mensaje
+    // Mensaje de confirmacion
     String mensaje = "Pago de $" + String.format("%.2f", pago.getMonto()) 
         + " registrado para " + inscripcion.getEstudiante().getNombre()
         + " en el curso " + inscripcion.getCurso().getNombre();
@@ -74,9 +81,9 @@ public class PagoService {
     if (pago.getCupon() != null) {
         mensaje += " (con descuento aplicado)";
     }
-
     return mensaje;
 }
+
         //asignar un cupon a pago
     public String asignarCuponAPago(int cuponId, int pagoId) {
     // Validar existencia de cupon y pago
@@ -90,18 +97,25 @@ public class PagoService {
     Cupon cupon = cuponRepository.findById(cuponId).get();
     Pago pago = pagoRepository.findById(pagoId).get();
 
-    // Validar que el pago no tenga ya un cupon asignado
+    // usado?
+    if (cupon.isUsado()) {
+        return "Este cupón ya ha sido utilizado y no puede ser asignado nuevamente";
+    }
+    // si el pago ya tiene cupon
     if (pago.getCupon() != null) {
         return "El pago ya tiene un cupon asignado";
     }
-
-    // Validar que el cupon tenga descuento definido (1-99%)
+    //inscripcion sin pago asignado
+    if (pago.getInscripcion() != null) {
+        return "No se puede modificar un pago ya asignado a una inscripción";
+    }
+    // restringir descuento de 1 a 99 considerandoq que es porcentual
     double descuentoPorcentaje = cupon.getDescuento();
     if (descuentoPorcentaje < 1 || descuentoPorcentaje > 99) {
         return "El descuento debe ser entre 1% y 99%";
     }
 
-    // Si el pago tiene inscripcion con curso y precio definido, aplicar descuento
+    // Si el pago tiene una inscripcion con curso y precio definido, aplicar descuento
     if (pago.getInscripcion() != null 
             && pago.getInscripcion().getCurso() != null 
             && pago.getInscripcion().getCurso().getPrecio() != null) {
@@ -110,12 +124,11 @@ public class PagoService {
         double descuentoMonto = precioCurso * (descuentoPorcentaje / 100);
         double nuevoMonto = precioCurso - descuentoMonto;
 
-        pago.setMonto(nuevoMonto);
+    pago.setMonto(nuevoMonto);
     }
 
     pago.setCupon(cupon);
     cupon.getPagos().add(pago);
-
     pagoRepository.save(pago);
 
     return "cupon asignado correctamente al pago";

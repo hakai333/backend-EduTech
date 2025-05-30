@@ -3,6 +3,7 @@ package com.vcore.backend_plataforma_web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,15 @@ public class CategoriaController {
         return categoriaService.listar();
     }
 
-    @GetMapping("/asignarCategoriaACurso/{cursoId}/{categoriaId}")
+    @PostMapping("/lista")
+    public ResponseEntity<String> almacenar(@RequestBody List<Categoria> categorias) {
+        for (Categoria categoria:categorias) {
+            categoriaService.almacenar(categoria);
+        }
+        return ResponseEntity.ok("Cursos almacenados correctamente");
+    }
+
+    @PostMapping("/asignarCategoriaACurso/{cursoId}/{categoriaId}")
     public String asignarCategoriaACurso(@PathVariable int cursoId,@PathVariable int categoriaId){
         return categoriaService.asignarCategoriaACurso(cursoId, categoriaId);
     }

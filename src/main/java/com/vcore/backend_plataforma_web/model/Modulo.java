@@ -1,5 +1,7 @@
 package com.vcore.backend_plataforma_web.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +26,8 @@ public class Modulo {
     private String descripcion;
 
     @ManyToOne
-    @JoinColumn(name="curso_id")
+    @JoinColumn(name = "curso_id")
+    @JsonBackReference
     private Curso curso;
     
 }

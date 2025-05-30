@@ -31,6 +31,7 @@ public class Cupon {
     private String codigo;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate fechaExpiracion;
+    private boolean usado;
 
 
     @OneToMany(mappedBy="cupon")
