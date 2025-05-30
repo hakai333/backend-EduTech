@@ -2,7 +2,7 @@ package com.vcore.backend_plataforma_web.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -29,14 +29,19 @@ public class Curso {
     private String descripcion;
     private Double precio;
 
-    // basti
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonIgnore
     private List<Inscripcion> inscripciones;
 
-    // Pulie
     @ManyToOne
     @JoinColumn(name = "profesor_id")
-    @JsonManagedReference(value = "usuarioCursos")
     private Usuario profesor;
+
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Modulo> modulos;
+
+    @ManyToOne
+    @JoinColumn(name = "Categoria_id")
+    private Categoria categoria;
 }

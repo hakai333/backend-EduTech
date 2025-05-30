@@ -2,7 +2,7 @@ package com.vcore.backend_plataforma_web.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,10 +24,9 @@ public class Rol {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre; // "ESTUDIANTE", "PROFESOR", "ADMIN", "GERENTE"
-    private List<String> descripcion;
-
+    private String descripcion;
 
     @OneToMany(mappedBy = "rol")
-    @JsonIgnore
+    @JsonBackReference
     private List<Usuario> usuarios; 
 }
