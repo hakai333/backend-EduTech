@@ -20,10 +20,15 @@ public class InscripcionService {
     @Autowired
     private CursoRepository cursoRepository;
 
-    InscripcionService(UsuarioRepository usuarioRepository) {
+    public InscripcionService(
+        UsuarioRepository usuarioRepository,
+        InscripcionRepository inscripcionRepository,
+        CursoRepository cursoRepository // Agregado
+    ) {
         this.usuarioRepository = usuarioRepository;
+        this.inscripcionRepository = inscripcionRepository;
+        this.cursoRepository = cursoRepository;
     }
-
     public String almacenar(Inscripcion inscripcion) {
             inscripcionRepository.save(inscripcion);
         return "Inscripcion creada!";

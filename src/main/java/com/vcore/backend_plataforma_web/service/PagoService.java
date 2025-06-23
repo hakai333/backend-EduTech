@@ -42,6 +42,12 @@ public String pagarInscripcion(int inscripcionId, int pagoId) {
 
     Inscripcion inscripcion = inscripcionRepository.findById(inscripcionId).get();
     Pago pago = pagoRepository.findById(pagoId).get();
+
+    if (inscripcion.getEstudiante() == null || 
+    inscripcion.getEstudiante().getRol() == null || 
+    !"ESTUDIANTE".equals(inscripcion.getEstudiante().getRol().getNombre())) {
+    return "La inscripción no tiene un estudiante válido asociado";
+    }
     
       //si inscripcion ya tiene un pago asociado
     boolean inscripcionYaPagada = pagoRepository.existsByInscripcionId(inscripcionId);
@@ -85,8 +91,7 @@ public String pagarInscripcion(int inscripcionId, int pagoId) {
     return mensaje;
 }
 
-        //asignar un cupon a pago
-    public String asignarCuponAPago(int cuponId, int pagoId) {
+ public String asignarCuponAPago(int cuponId, int pagoId) {
     // Validar existencia de cupon y pago
     if (!cuponRepository.existsById(cuponId)) {
         return "El cupon ingresado no existe";
@@ -98,40 +103,39 @@ public String pagarInscripcion(int inscripcionId, int pagoId) {
     Cupon cupon = cuponRepository.findById(cuponId).get();
     Pago pago = pagoRepository.findById(pagoId).get();
 
-    // usado?
+    // Validaciones
     if (cupon.isUsado()) {
         return "Este cupón ya ha sido utilizado y no puede ser asignado nuevamente";
     }
-    // si el pago ya tiene cupon
     if (pago.getCupon() != null) {
         return "El pago ya tiene un cupon asignado";
     }
-    //inscripcion sin pago asignado
-    if (pago.getInscripcion() != null) {
+    if (pago.getInscripcion() != null && pago.getInscripcion().getId() != null) {
         return "No se puede modificar un pago ya asignado a una inscripción";
     }
-    // restringir descuento de 1 a 99 considerandoq que es porcentual
+    
+    // Validar rango de descuento
     double descuentoPorcentaje = cupon.getDescuento();
     if (descuentoPorcentaje < 1 || descuentoPorcentaje > 99) {
         return "El descuento debe ser entre 1% y 99%";
     }
 
-    // Si el pago tiene una inscripcion con curso y precio, aplicar descuento
-    if (pago.getInscripcion() != null 
-            && pago.getInscripcion().getCurso() != null 
-            && pago.getInscripcion().getCurso().getPrecio() != null) {
-        
-        double precioCurso = pago.getInscripcion().getCurso().getPrecio();
-        double descuentoMonto = precioCurso * (descuentoPorcentaje / 100);
-        double nuevoMonto = precioCurso - descuentoMonto;
-
+    // Aplicar descuento al monto existente del pago
+    double montoActual = pago.getMonto();
+    double descuentoMonto = montoActual * (descuentoPorcentaje / 100);
+    double nuevoMonto = montoActual - descuentoMonto;
     pago.setMonto(nuevoMonto);
-    }
 
+    // Establecer relaciones
     pago.setCupon(cupon);
     cupon.getPagos().add(pago);
+    cupon.setUsado(true);
+
+    // Guardar cambios
     pagoRepository.save(pago);
+    cuponRepository.save(cupon);
 
     return "cupon asignado correctamente al pago";
     }
 }
+
