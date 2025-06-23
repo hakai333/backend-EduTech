@@ -17,6 +17,18 @@ import com.vcore.backend_plataforma_web.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
+
+
+    public UsuarioService(UsuarioRepository usuarioRepository,
+                          RolRepository rolRepository,
+                          PersonaRepository personaRepository) {
+        this.usuarioRepository = usuarioRepository;
+        this.rolRepository = rolRepository;
+        this.personaRepository = personaRepository;
+    }
+    
+
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
