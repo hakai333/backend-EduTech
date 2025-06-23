@@ -34,7 +34,7 @@ public class UsuarioServiceTest {
     @InjectMocks
     private UsuarioService usuarioService;
 
-    // ✅ 1) Buscar por ID - existente
+    //Buscar por ID - existente
     @Test
     void buscarPorId_UsuarioExistente_RetornaUsuario() {
         Usuario usuario = new Usuario();
@@ -48,7 +48,7 @@ public class UsuarioServiceTest {
         verify(usuarioRepository).findById(1);
     }
 
-    // ✅ 2) Buscar por Nombre - existente
+    //Buscar por Nombre - existente
     @Test
     void buscarPorNombre_UsuarioExistente_RetornaUsuario() {
         Usuario usuario = new Usuario();
@@ -62,7 +62,7 @@ public class UsuarioServiceTest {
         verify(usuarioRepository).findAllByNombre("Miguel");
     }
 
-    // ✅ 3) Crear Usuario - admin correcto
+    //Crear Usuario - admin correcto
     @Test
     void crearUsuario_AdminCorrecto_AlmacenaUsuario() {
         Usuario usuarioActual = new Usuario();
@@ -80,7 +80,7 @@ public class UsuarioServiceTest {
         verify(usuarioRepository).save(nuevoUsuario);
     }
 
-    // ✅ 4) Actualizar Usuario - admin correcto
+    //Actualizar Usuario - admin correcto
     @Test
     void actualizarUsuario_AdminCorrecto_ActualizaDatos() {
         Usuario usuarioActual = new Usuario();
@@ -104,7 +104,7 @@ public class UsuarioServiceTest {
         verify(usuarioRepository).save(usuarioExistente);
     }
 
-    // ✅ 5) Desactivar Usuario - admin correcto
+    //Desactivar Usuario - admin correcto
     @Test
     void desactivarUsuario_AdminCorrecto_Desactiva() {
         Usuario usuarioDesactivar = new Usuario();
