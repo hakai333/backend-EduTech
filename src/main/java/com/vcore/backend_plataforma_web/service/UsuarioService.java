@@ -18,7 +18,7 @@ import com.vcore.backend_plataforma_web.repository.UsuarioRepository;
 @Service
 public class UsuarioService {
 
-
+    @Autowired
     public UsuarioService(UsuarioRepository usuarioRepository,
                           RolRepository rolRepository,
                           PersonaRepository personaRepository) {
