@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 SRIPTS PARA INGRESAR AL INICIO DEL PROGRAMA
 
 SELECT * FROM ROLES;
@@ -12,3 +13,36 @@ INSERT INTO usuarios (nombre, contrasena, email, fecha_registro, rol_id) VALUES
 ('profesoraPaulina', 'profesor123', 'profesora@mail.com', CURDATE(), 3);
 
 Y LUEGO TRABAJAR CON POSTMAN
+=======
+<<<<<<< HEAD
+SRIPTS PARA INGRESAR AL INICIO DEL PROGRAMA
+
+SELECT * FROM ROLES;
+-- ADMIN
+INSERT INTO usuarios (nombre, contrasena, email, fecha_registro, rol_id) VALUES
+('admin1', 'admin123', 'admin1@mail.com', CURDATE(), 1);
+
+-- ESTUDIANTE & PROFESOR
+INSERT INTO usuarios (nombre, contrasena, email, fecha_registro, rol_id) VALUES
+('estudianteBastian', 'estudiante123', 'estudiante1@mail.com', CURDATE(), 4),
+('estudianteMiguel', 'estudiante123', 'estudiante2@mail.com', CURDATE(), 4),
+('profesoraPaulina', 'profesor123', 'profesora@mail.com', CURDATE(), 3);
+
+Y LUEGO TRABAJAR CON POSTMAN
+=======
+SRIPTS PARA INGRESAR AL INICIO DEL PROGRAMA
+
+SELECT * FROM ROLES;
+-- ADMIN
+INSERT INTO usuarios (nombre, contrasena, email, fecha_registro, rol_id) VALUES
+('admin1', 'admin123', 'admin1@mail.com', CURDATE(), 1);
+
+-- ESTUDIANTE & PROFESOR
+INSERT INTO usuarios (nombre, contrasena, email, fecha_registro, rol_id) VALUES
+('estudianteBastian', 'estudiante123', 'estudiante1@mail.com', CURDATE(), 4),
+('estudianteMiguel', 'estudiante123', 'estudiante2@mail.com', CURDATE(), 4),
+('profesoraPaulina', 'profesor123', 'profesora@mail.com', CURDATE(), 3);
+
+Y LUEGO TRABAJAR CON POSTMAN
+>>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
+>>>>>>> basti

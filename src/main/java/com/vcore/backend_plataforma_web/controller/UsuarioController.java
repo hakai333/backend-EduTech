@@ -11,6 +11,13 @@ import com.vcore.backend_plataforma_web.DTO.UsuarioDTO;
 import com.vcore.backend_plataforma_web.model.Rol;
 import com.vcore.backend_plataforma_web.model.Usuario;
 import com.vcore.backend_plataforma_web.service.UsuarioService;
+<<<<<<< HEAD
+=======
+
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+>>>>>>> basti
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,7 +48,12 @@ public class UsuarioController {
     // ACTUALIZAR USUARIO SERVICE
     @PostMapping("/actualizar/{idUsuarioActual}/{idUsuarioActualizar}")
     public ResponseEntity<String> actualizarUsuario(
+<<<<<<< HEAD
             @RequestBody Usuario usuarioActualizar,
+=======
+            @RequestBody @Schema(description = "Datos actualizados del usuario") Usuario usuarioActualizar,
+            @Parameter(description = "ID del usuario administrador que realiza la acción") 
+>>>>>>> basti
             @PathVariable Integer idUsuarioActual,
             @PathVariable Integer idUsuarioActualizar) {
         Usuario usuarioActual = usuarioService.buscarPorId(idUsuarioActual);
@@ -50,13 +62,20 @@ public class UsuarioController {
             return ResponseEntity.ok("Usuario con ID " + idUsuarioActualizar + " actualizado correctamente!");
         }
         return ResponseEntity.badRequest().body(resultado);
+<<<<<<< HEAD
 
+=======
+>>>>>>> basti
     }
 
     // MIGUEL REYES
     // DESACTIVAR USUARIO SERVICE
     @PostMapping("/desactivar/{idUsuarioActual}/{idUsuarioDesactivar}")
     public ResponseEntity<String> desactivarUsuario(
+<<<<<<< HEAD
+=======
+            @Parameter(description = "ID del usuario administrador que realiza la acción") 
+>>>>>>> basti
             @PathVariable Integer idUsuarioActual,
             @PathVariable Integer idUsuarioDesactivar) {
 
@@ -74,6 +93,10 @@ public class UsuarioController {
     // ELIMINAR USUARIO SERVICE
     @DeleteMapping("/eliminar/{idUsuarioActual}/{idUsuarioAEliminar}")
     public ResponseEntity<String> eliminarUsuario(
+<<<<<<< HEAD
+=======
+            @Parameter(description = "ID del usuario administrador que realiza la acción") 
+>>>>>>> basti
             @PathVariable Integer idUsuarioActual,
             @PathVariable Integer idUsuarioAEliminar) {
         String resultado = usuarioService.eliminarUsuario(idUsuarioActual, idUsuarioAEliminar);
@@ -94,7 +117,12 @@ public class UsuarioController {
     // ASIGAR ROL O PERMISOS
     @PostMapping("/asignar-rol/{idUsuarioActual}/{idUsuarioAsignar}")
     public ResponseEntity<String> asignarUsuario(
+<<<<<<< HEAD
             @RequestBody Rol rol,
+=======
+            @RequestBody @Schema(description = "Datos del rol a asignar") Rol rol,
+            @Parameter(description = "ID del usuario administrador que realiza la acción") 
+>>>>>>> basti
             @PathVariable Integer idUsuarioActual,
             @PathVariable Integer idUsuarioAsignar) {
         if (rol == null || rol.getNombre() == null) {
@@ -117,5 +145,8 @@ public class UsuarioController {
     public List<UsuarioDTO> obtenerUsuarioRolDto() {
         return usuarioService.obtenerUsuarioRolDto();
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> basti
 }

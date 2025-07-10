@@ -17,6 +17,7 @@ import com.vcore.backend_plataforma_web.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
+<<<<<<< HEAD
 
     @Autowired
     public UsuarioService(UsuarioRepository usuarioRepository,
@@ -29,6 +30,8 @@ public class UsuarioService {
     
 
 
+=======
+>>>>>>> basti
     @Autowired
     private UsuarioRepository usuarioRepository;
 
