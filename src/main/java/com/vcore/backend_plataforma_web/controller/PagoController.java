@@ -32,7 +32,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 @RequestMapping("/pagos")
 public class PagoController {
 
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
     @Autowired
     private PagoService pagoService;
 
@@ -62,20 +61,10 @@ public class PagoController {
         @ApiResponse(responseCode = "500", description = "Error al obtener los pagos", content = @Content)
     })
     public List<Pago> listar() {
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
         return pagoService.listar();
     }
 
     @PostMapping("/asignarPagoAInscripcion/{inscripcionId}/{pagoId}")
-<<<<<<< HEAD
-    public String pagarInscripcion(@PathVariable int inscripcionId,@PathVariable int pagoId){
-        return pagoService.pagarInscripcion(inscripcionId,pagoId);
-    }
-
-    @PostMapping("/asignarCuponAPago/{cuponId}/{pagoId}")
-    public String asignarCuponAPago(@PathVariable int cuponId,@PathVariable int pagoId){
-        return pagoService.asignarCuponAPago(cuponId,pagoId);
-=======
     @Operation(summary = "Asigna un pago a una inscripción.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Pago asignado correctamente a la inscripción"),
@@ -97,6 +86,5 @@ public class PagoController {
         @Parameter(description = "ID del cupón a aplicar", required = true) @PathVariable int cuponId,
         @Parameter(description = "ID del pago al que se asignará el cupón", required = true) @PathVariable int pagoId) {
         return pagoService.asignarCuponAPago(cuponId, pagoId);
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
     }
 }

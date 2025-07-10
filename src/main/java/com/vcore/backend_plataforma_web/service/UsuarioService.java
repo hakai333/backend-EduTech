@@ -17,21 +17,6 @@ import com.vcore.backend_plataforma_web.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
-<<<<<<< HEAD
-=======
-
-    @Autowired
-    public UsuarioService(UsuarioRepository usuarioRepository,
-                          RolRepository rolRepository,
-                          PersonaRepository personaRepository) {
-        this.usuarioRepository = usuarioRepository;
-        this.rolRepository = rolRepository;
-        this.personaRepository = personaRepository;
-    }
-    
-
-
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
     @Autowired
     private UsuarioRepository usuarioRepository;
 

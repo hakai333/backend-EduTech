@@ -28,30 +28,19 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 
-<<<<<<< HEAD
-
-
-
-@RestController
-=======
 @RestController
 @Tag(name = "Incidencias", description = "Operaciones relacionadas con el registro y gestión de incidencias en el sistema")    
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
 @RequestMapping("/incidencias")
 public class IncidenciaController {
     @Autowired
     private IncidenciaService incidenciaService;
 
     @PostMapping("/{idUsuario}")
-<<<<<<< HEAD
-    public String almacenar(@RequestBody Incidencia incidencia, @PathVariable Integer idUsuario) {
-=======
     @Operation(summary = "Registra una nueva incidencia", 
               description = "Crea y almacena una incidencia asociada a un usuario específico en la base de datos")
     @ApiResponses({
@@ -66,24 +55,10 @@ public class IncidenciaController {
             
             @Parameter(description = "ID del usuario que reporta la incidencia", required = true)
             @PathVariable Integer idUsuario) {
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
         return incidenciaService.almacenar(incidencia, idUsuario);
     }
 
     @GetMapping
-<<<<<<< HEAD
-    public List<Incidencia> listar() {
-        return incidenciaService.listar();
-    }
-    
-
-
-
-    
-    
-
-}
-=======
     @Operation(summary = "Obtiene todas las incidencias", 
               description = "Retorna una lista completa de todas las incidencias registradas en el sistema")
     @ApiResponse(responseCode = "200", description = "Lista de incidencias obtenida exitosamente",
@@ -92,4 +67,3 @@ public class IncidenciaController {
         return incidenciaService.listar();
     }
 }
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)

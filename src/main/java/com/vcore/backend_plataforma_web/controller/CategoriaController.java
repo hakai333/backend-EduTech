@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.vcore.backend_plataforma_web.model.Categoria;
 import com.vcore.backend_plataforma_web.service.CategoriaService;
 
@@ -36,14 +37,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/categorias")
 public class CategoriaController {
     
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
     @Autowired
     private CategoriaService categoriaService;
 
     @PostMapping
-<<<<<<< HEAD
-    public String almacenar(@RequestBody Categoria categoria){
-=======
     @Operation(summary = "Crear nueva categoría", 
                description = "Registra una nueva categoría en el sistema para clasificación de cursos")
     @ApiResponses(value = {
@@ -59,21 +56,16 @@ public class CategoriaController {
                           value = "{\"nombre\":\"Programación\",\"descripcion\":\"Cursos de desarrollo de software\"}"
                       )))
             @RequestBody Categoria categoria) {
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
         return categoriaService.almacenar(categoria);
     }
 
     @GetMapping
-<<<<<<< HEAD
-    public List<Categoria>listar(){
-=======
     @Operation(summary = "Obtener todas las categorías", 
                description = "Recupera la lista completa de categorías disponibles en el sistema")
     @ApiResponse(responseCode = "200", description = "Lista de categorías obtenida exitosamente",
                 content = @Content(mediaType = "application/json",
                 schema = @Schema(implementation = Categoria.class)))
     public List<Categoria> listar() {
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
         return categoriaService.listar();
     }
 
@@ -144,4 +136,3 @@ public class CategoriaController {
         return categoriaService.asignarCategoriaACurso(cursoId, categoriaId);
     }
 }
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)

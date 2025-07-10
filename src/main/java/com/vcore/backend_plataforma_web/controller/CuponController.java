@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vcore.backend_plataforma_web.model.Cupon;
 import com.vcore.backend_plataforma_web.service.CuponService;
-<<<<<<< HEAD
-=======
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -20,7 +18,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,14 +35,10 @@ public class CuponController {
 @RequestMapping("/cupones")
 public class CuponController {
     
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
     @Autowired
     private CuponService cuponService;
 
     @PostMapping
-<<<<<<< HEAD
-    public String almacenar(@RequestBody Cupon cupon) {
-=======
     @Operation(summary = "Crear nuevo cupón", 
                description = "Registra un nuevo cupón de descuento en el sistema")
     @ApiResponses(value = {
@@ -64,17 +57,10 @@ public class CuponController {
                            value = "{\"codigo\":\"DESC20\",\"descuento\":20.0,\"validoHasta\":\"2023-12-31\"}"
                        )))
             @RequestBody Cupon cupon) {
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
         return cuponService.almacenar(cupon);
     }
 
     @GetMapping
-<<<<<<< HEAD
-    public List<Cupon> listar() {
-        return cuponService.listar();
-    }
-}
-=======
     @Operation(summary = "Obtener todos los cupones", 
                description = "Retorna una lista completa de todos los cupones registrados en el sistema")
     @ApiResponse(responseCode = "200", description = "Lista de cupones obtenida exitosamente",
@@ -84,4 +70,3 @@ public class CuponController {
         return cuponService.listar();
     }
 }
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)

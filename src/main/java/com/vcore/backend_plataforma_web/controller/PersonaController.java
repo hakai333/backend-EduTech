@@ -36,7 +36,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/personas")
 public class PersonaController {
 
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
     @Autowired
     private PersonaService personaService;
 
@@ -69,7 +68,6 @@ public class PersonaController {
         @RequestBody(description = "Lista de personas a registrar", required = true,
                      content = @Content(schema = @Schema(implementation = Persona.class)))
         @org.springframework.web.bind.annotation.RequestBody List<Persona> personas) {
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
         for (Persona persona : personas) {
             personaService.almacenar(persona);
         }
@@ -77,9 +75,6 @@ public class PersonaController {
     }
 
     @PostMapping("/asignarUsuario/{rutPersona}/{idUsuario}")
-<<<<<<< HEAD
-    public String asignarUsuario(@PathVariable String rutPersona, @PathVariable Integer idUsuario) {
-=======
     @Operation(summary = "Permite asignar los datos personales almacenados a un usuario EDUTECH.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Datos personales asignados al usuario"),
@@ -88,14 +83,10 @@ public class PersonaController {
     public String asignarUsuario(
         @Parameter(description = "RUT de la persona", required = true) @PathVariable String rutPersona,
         @Parameter(description = "ID del usuario al que se asignará", required = true) @PathVariable Integer idUsuario) {
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
         return personaService.asignarUsuario(rutPersona, idUsuario);
     }
 
     @PostMapping
-<<<<<<< HEAD
-    public String almacenar(@RequestBody Persona persona) {
-=======
     @Operation(summary = "Permite almacenar los datos personales de un usuario EDUTECH.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Datos personales almacenados correctamente"),
@@ -105,7 +96,6 @@ public class PersonaController {
         @RequestBody(description = "Datos personales del usuario a registrar", required = true,
                      content = @Content(schema = @Schema(implementation = Persona.class)))
         @org.springframework.web.bind.annotation.RequestBody Persona persona) {
->>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
         return personaService.almacenar(persona);
     }
 }
