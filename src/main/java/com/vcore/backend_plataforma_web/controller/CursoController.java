@@ -11,6 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vcore.backend_plataforma_web.model.Curso;
 import com.vcore.backend_plataforma_web.service.CursoService;
+<<<<<<< HEAD
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+
+@RestController
+@Tag(name = "Cursos", description = "Operaciones CRUD para la gestión de cursos en la plataforma EDUTECH")    
+@RequestMapping("/cursos")
+public class CursoController {
+=======
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -26,10 +36,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/cursos")
 public class CursoController {
     
+>>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
     @Autowired
     private CursoService cursoService;
 
     @PostMapping 
+<<<<<<< HEAD
+    public String almacenar(@RequestBody Curso curso){
+=======
     @Operation(summary = "Crear un nuevo curso", 
                description = "Registra un nuevo curso en el sistema con los datos proporcionados")
     @ApiResponses(value = {
@@ -39,10 +53,19 @@ public class CursoController {
     public String almacenar(
             @Parameter(description = "Objeto Curso con los datos a registrar", required = true)
             @RequestBody Curso curso) {
+>>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
         return cursoService.almacenar(curso);
     }
 
     @GetMapping
+<<<<<<< HEAD
+    public List<Curso>listar() {
+        return cursoService.listar();
+    }
+
+    @PostMapping("/lista")
+    public ResponseEntity<String> almacenar(@RequestBody List<Curso> cursos) {
+=======
     @Operation(summary = "Obtener todos los cursos", 
                description = "Retorna una lista con todos los cursos registrados en el sistema")
     @ApiResponse(responseCode = "200", description = "Lista de cursos obtenida exitosamente")
@@ -60,6 +83,7 @@ public class CursoController {
     public ResponseEntity<String> almacenar(
             @Parameter(description = "Lista de objetos Curso a registrar", required = true)
             @RequestBody List<Curso> cursos) {
+>>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
         for (Curso curso : cursos) {
             cursoService.almacenar(curso);
         }
@@ -67,6 +91,14 @@ public class CursoController {
     }
 
     @PostMapping("/asignarProfesorACurso/{usuarioId}/{cursoId}")
+<<<<<<< HEAD
+    public String asignarProfesor(@PathVariable int usuarioId, @PathVariable int cursoId){
+        return cursoService.asignarProfesor(usuarioId,cursoId);
+    }
+
+
+}
+=======
     @Operation(summary = "Asignar profesor a curso", 
                description = "Asocia un profesor existente a un curso específico")
     @ApiResponses(value = {
@@ -81,3 +113,4 @@ public class CursoController {
         return cursoService.asignarProfesor(usuarioId, cursoId);
     }
 }
+>>>>>>> f5dc67c (Subiendo documentación Swagger a la rama basti)
