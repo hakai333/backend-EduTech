@@ -41,7 +41,7 @@ public class EvaluacionController {
             Evaluacion evaluacion) {
         return evaluacionService.almacenar(evaluacion);
     }
-
+//listar
     @GetMapping
     @Operation(summary = "Obtiene todas las evaluaciones", 
               description = "Retorna una lista completa de todas las evaluaciones registradas en el sistema")
