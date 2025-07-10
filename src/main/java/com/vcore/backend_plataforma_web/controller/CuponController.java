@@ -22,14 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 
-<<<<<<< HEAD
-
-
-@RestController
-@Tag(name = "Cupones", description = "Gestión de cupones de descuento - Operaciones CRUD para la administración de cupones promocionales")    
-@RequestMapping("/cupones")
-public class CuponController {
-=======
 @RestController
 @Tag(name = "Cupones", description = "Gestión de cupones de descuento - Operaciones CRUD para la administración de cupones promocionales")    
 @RequestMapping("/cupones")
@@ -49,7 +41,6 @@ public class CuponController {
                      content = @Content(mediaType = "text/plain",
                      examples = @ExampleObject(value = "Error: Los datos del cupón son inválidos")))
     })
-
     public String almacenar(
             @Parameter(description = "Objeto Cupón con los datos a registrar", required = true,
                        content = @Content(schema = @Schema(implementation = Cupon.class),

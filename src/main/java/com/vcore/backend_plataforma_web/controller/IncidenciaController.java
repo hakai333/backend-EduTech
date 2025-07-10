@@ -1,16 +1,5 @@
 package com.vcore.backend_plataforma_web.controller;
 
-<<<<<<< HEAD
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.vcore.backend_plataforma_web.model.Incidencia;
-import com.vcore.backend_plataforma_web.service.IncidenciaService;
-=======
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

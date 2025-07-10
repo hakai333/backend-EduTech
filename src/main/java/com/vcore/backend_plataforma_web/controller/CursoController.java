@@ -11,16 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vcore.backend_plataforma_web.model.Curso;
 import com.vcore.backend_plataforma_web.service.CursoService;
-<<<<<<< HEAD
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
-
-@RestController
-@Tag(name = "Cursos", description = "Operaciones CRUD para la gestión de cursos en la plataforma EDUTECH")    
-@RequestMapping("/cursos")
-public class CursoController {
-=======
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -53,14 +43,6 @@ public class CursoController {
     }
 
     @GetMapping
-<<<<<<< HEAD
-    public List<Curso>listar() {
-        return cursoService.listar();
-    }
-
-    @PostMapping("/lista")
-    public ResponseEntity<String> almacenar(@RequestBody List<Curso> cursos) {
-=======
     @Operation(summary = "Obtener todos los cursos", 
                description = "Retorna una lista con todos los cursos registrados en el sistema")
     @ApiResponse(responseCode = "200", description = "Lista de cursos obtenida exitosamente")

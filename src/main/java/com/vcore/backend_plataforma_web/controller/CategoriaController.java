@@ -14,13 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vcore.backend_plataforma_web.model.Categoria;
 import com.vcore.backend_plataforma_web.service.CategoriaService;
 
-<<<<<<< HEAD
-@RestController
-@Tag(name = "Categorías", 
-     description = "Gestión de categorías de cursos - Permite administrar las categorías para clasificar los cursos ofrecidos")    
-@RequestMapping("/categorias")
-public class CategoriaController {
-=======
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -69,33 +62,6 @@ public class CategoriaController {
     }
 
     @PostMapping("/lista")
-<<<<<<< HEAD
-    public ResponseEntity<String> almacenar(@RequestBody List<Categoria> categorias) {
-        for (Categoria categoria:categorias) {
-            categoriaService.almacenar(categoria);
-        }
-        return ResponseEntity.ok("Categorías almacenadas correctamente");
-    }
-
-    @PostMapping("/asignarCategoriaACurso/{cursoId}/{categoriaId}")
-    @Operation(summary = "Asignar categoría a curso", 
-               description = "Asocia una categoría existente a un curso específico")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Categoría asignada exitosamente",
-                    content = @Content(mediaType = "text/plain",
-                    examples = @ExampleObject(value = "Categoría asignada correctamente"))),
-        @ApiResponse(responseCode = "404", description = "Curso o categoría no encontrada"),
-        @ApiResponse(responseCode = "400", description = "Asignación inválida")
-    })
-    public String asignarCategoriaACurso(
-            @Parameter(description = "ID del curso al que se asignará la categoría", required = true, example = "101")
-            @PathVariable int cursoId,
-            @Parameter(description = "ID de la categoría a asignar", required = true, example = "5")
-            @PathVariable int categoriaId) {
-        return categoriaService.asignarCategoriaACurso(cursoId, categoriaId);
-    }
-}
-=======
     @Operation(summary = "Crear múltiples categorías", 
                description = "Registra un conjunto de categorías en una sola operación mediante una lista")
     @ApiResponses(value = {

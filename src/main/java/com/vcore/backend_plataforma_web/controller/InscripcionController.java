@@ -10,43 +10,18 @@ import com.vcore.backend_plataforma_web.model.Inscripcion;
 import com.vcore.backend_plataforma_web.service.InscripcionService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-<<<<<<< HEAD
-
-//Bastian
-@RestController
-@Tag(name = "Inscripciones", description = "Operaciones relacionadas a las inscripciones de los usuarios a cursos en EDUTECH.")
-@RequestMapping("/inscripciones")
-public class InscripcionController {
-
-    @Autowired
-    private InscripcionService inscripcionService;
-
-    @PostMapping
-    @Operation(summary = "Crea una inscripción y la registra en la base de datos.")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Inscripción registrada correctamente"),
-        @ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content)
-    })
-    public String almacenar(@RequestBody Inscripcion inscripcion) {
-        return inscripcionService.almacenar(inscripcion);
-    }
-
-    @GetMapping
-    public List <Inscripcion> listar(){
-=======
 @RestController
 @Tag(name = "Inscripciones", description = "Operaciones relacionadas a las inscripciones de los usuarios a cursos en EDUTECH.")
 @RequestMapping("/inscripciones")
